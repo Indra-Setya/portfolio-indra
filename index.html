@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Indra Portofolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome & AOS Animation CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Konfigurasi Tailwind untuk mendukung class-based dark mode
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              heading: ["Poppins", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                light: "#818cf8",
+                DEFAULT: "#4f46e5" /* Indigo-600 */,
+                dark: "#312e81",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Animasi transisi smooth untuk seluruh halaman saat ganti tema */
+      body {
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      /* Scrollbar Light Mode */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      /* Scrollbar Dark Mode */
+      html.dark ::-webkit-scrollbar-track {
+        background: #0f172a;
+      }
+      html.dark ::-webkit-scrollbar-thumb {
+        background: #334155;
+      }
+      html.dark ::-webkit-scrollbar-thumb:hover {
+        background: #475569;
+      }
+    </style>
+
+    <!-- Script inisialisasi Dark Mode agar tidak berkedip (FOUC) saat loading -->
+    <script>
+      if (
+        localStorage.getItem("theme") === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </head>
+  <body
+    class="bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 font-sans antialiased overflow-x-hidden selection:bg-brand selection:text-white"
+  >
+    <!-- Navbar -->
+    <nav
+      class="fixed w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 z-50 transition-all duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20 items-center">
+          <div
+            class="flex-shrink-0 font-heading font-bold text-2xl tracking-tighter"
+          >
+            <a
+              href="#beranda"
+              class="text-slate-900 dark:text-white transition-colors"
+            >
+              Indra<span class="text-brand">.</span>
+            </a>
+          </div>
+          <div
+            class="hidden lg:flex space-x-8 font-medium text-sm tracking-wide"
+          >
+            <a
+              href="#beranda"
+              class="hover:text-brand dark:hover:text-brand-light transition-colors"
+              >Beranda</a
+            >
+            <a
+              href="#tentang"
+              class="hover:text-brand dark:hover:text-brand-light transition-colors"
+              >Tentang</a
+            >
+            <a
+              href="#pengalaman"
+              class="hover:text-brand dark:hover:text-brand-light transition-colors"
+              >Pengalaman</a
+            >
+            <a
+              href="#proyek"
+              class="hover:text-brand dark:hover:text-brand-light transition-colors"
+              >Proyek</a
+            >
+            <a
+              href="#blog"
+              class="hover:text-brand dark:hover:text-brand-light transition-colors"
+              >Blog</a
+            >
+          </div>
+
+          <div class="flex items-center gap-4">
+            <!-- Tombol Toggle Dark Mode -->
+            <button
+              id="theme-toggle"
+              class="w-10 h-10 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-brand dark:hover:text-brand-light transition-all border border-transparent dark:border-slate-700"
+              aria-label="Toggle Dark Mode"
+            >
+              <i
+                id="theme-toggle-dark-icon"
+                class="fa-solid fa-moon hidden text-lg"
+              ></i>
+              <i
+                id="theme-toggle-light-icon"
+                class="fa-solid fa-sun hidden text-lg text-yellow-400"
+              ></i>
+            </button>
+
+            <div class="hidden md:block">
+              <a
+                href="#kontak"
+                class="bg-slate-900 dark:bg-brand hover:bg-brand dark:hover:bg-indigo-500 text-white px-5 py-2.5 rounded-full font-medium transition-all shadow-lg hover:shadow-brand/30 dark:shadow-brand/20"
+              >
+                Sapa Saya
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="beranda"
+      class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden px-4 transition-colors duration-300"
+    >
+      <div
+        class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand/10 dark:bg-brand/20 blur-3xl z-0"
+      ></div>
+      <div
+        class="absolute bottom-0 left-0 -ml-20 w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/20 blur-3xl z-0"
+      ></div>
+
+      <div
+        class="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-16 relative z-10"
+      >
+        <div
+          class="w-full lg:w-3/5 text-center lg:text-left"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+        >
+          <div
+            class="inline-block px-4 py-2 rounded-full bg-indigo-50 dark:bg-brand/10 border border-indigo-100 dark:border-brand/20 text-brand dark:text-brand-light font-medium text-sm mb-6 transition-colors"
+          >
+            <i class="fa-solid fa-rocket mr-2"></i> Tersedia untuk peluang kerja
+          </div>
+          <h1
+            class="font-heading text-5xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-6 leading-tight transition-colors"
+          >
+            Membangun Solusi Digital dengan <br class="hidden lg:block" />
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-purple-600 dark:from-brand-light dark:to-purple-400"
+              >Kode & Kreativitas</span
+            >
+          </h1>
+          <p
+            class="text-lg lg:text-xl text-slate-500 dark:text-slate-400 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed transition-colors"
+          >
+            Halo, Saya
+            <strong class="text-slate-800 dark:text-slate-200"
+              >Indra Setya A.I</strong
+            >. Seorang
+            <strong class="text-slate-800 dark:text-slate-200"
+              >Lulusan IT</strong
+            >
+            yang sekarang berfokus pada perancangan produk digital yang
+            fungsional, bersih, dan berpusat pada pengguna.
+          </p>
+          <div
+            class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+          >
+            <a
+              href="#proyek"
+              class="bg-brand hover:bg-indigo-700 text-white px-8 py-4 rounded-full font-medium transition-all shadow-lg shadow-brand/30 dark:shadow-brand/20 flex items-center justify-center gap-2"
+            >
+              Lihat Karya Saya <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a
+              href="[Link CV PDF Anda]"
+              target="_blank"
+              class="bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 px-8 py-4 rounded-full font-medium transition-all flex items-center justify-center gap-2 hover:border-slate-300"
+            >
+              <i class="fa-solid fa-download"></i> Unduh CV
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="w-full lg:w-2/5 flex justify-center"
+          data-aos="fade-left"
+          data-aos-duration="1000"
+        >
+          <div class="relative w-72 h-72 lg:w-96 lg:h-96">
+            <div
+              class="absolute inset-0 border-2 border-brand dark:border-brand-light rounded-2xl rotate-6 transition-transform hover:rotate-0 duration-300 z-0"
+            ></div>
+            <img
+              src="IMG\Profile.png"
+              alt="Foto Profil"
+              class="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl dark:shadow-brand/10 z-10 transition-transform hover:-translate-y-2 duration-300"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TENTANG SAYA -->
+    <section
+      id="tentang"
+      class="py-24 bg-white dark:bg-slate-800/30 px-4 transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-16">
+          <!-- Kuadran 1: Tentang -->
+          <div data-aos="fade-up">
+            <span
+              class="text-brand dark:text-brand-light font-bold text-sm tracking-widest uppercase mb-3 block"
+              >Tentang Saya</span
+            >
+            <h2
+              class="font-heading text-3xl font-bold text-slate-900 dark:text-white mb-4 leading-tight transition-colors"
+            >
+              Pengembang Digital & <br />Pecinta Solusi Cerdas
+            </h2>
+            <p
+              class="text-slate-600 dark:text-slate-400 leading-relaxed transition-colors"
+            >
+              Saya adalah seorang pengembang yang memiliki ketertarikan mendalam
+              pada teknologi dan bagaimana ia bisa menyelesaikan masalah nyata.
+              Dengan latar belakang pendidikan di Teknik Informatika, fokus
+              utama saya adalah merancang, membangun, dan mengoptimalkan
+              aplikasi dan system yang scalable dan user-friendly dari tahap
+              konsep hingga produksi.
+            </p>
+          </div>
+          <!-- Kuadran 2: Tech Stack -->
+          <div data-aos="fade-up" data-aos-delay="100">
+            <h2
+              class="font-heading text-3xl font-bold text-slate-900 dark:text-white mb-4 transition-colors"
+            >
+              Spesialisasi & *Tech Stack* Inti
+            </h2>
+            <p
+              class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4 transition-colors"
+            >
+              Dalam pengembangan web, saya terbiasa menggunakan arsitektur
+              modern. Berikut adalah teknologi yang menjadi keseharian saya:
+            </p>
+            <ul
+              class="text-slate-600 dark:text-slate-400 space-y-2 transition-colors"
+            >
+              <li>
+                <strong class="text-slate-800 dark:text-slate-200"
+                  >Backend:</strong
+                >
+                Node.js, Python (Flask), PHP (Laravel), C++, RESTful API.
+              </li>
+              <li>
+                <strong class="text-slate-800 dark:text-slate-200"
+                  >Database:</strong
+                >
+                Google Cloud Platform (GCP), MySQL, MongoDB, Firebase.
+              </li>
+              <li>
+                <strong class="text-slate-800 dark:text-slate-200"
+                  >Frontend:</strong
+                >
+                JavaScript, HTML/CSS, Kotlin (Android Studio).
+              </li>
+              <li>
+                <strong class="text-slate-800 dark:text-slate-200"
+                  >AI & Data Science:</strong
+                >
+                Natural Language Processing (NLP), Recommendation Systems, FastText, IndoBERT.
+              </li>
+              <li>
+                <strong class="text-slate-800 dark:text-slate-200"
+                  >Lainnya:</strong
+                >
+                Git, System Analysis, Software Engineering, Agile Methodologies.
+              </li>
+            </ul>
+          </div>
+          <!-- Kuadran 3: Kontribusi -->
+          <div data-aos="fade-up" data-aos-delay="200">
+            <h2
+              class="font-heading text-3xl font-bold text-slate-900 dark:text-white mb-4 transition-colors"
+            >
+              Fokus & Kontribusi
+            </h2>
+            <p
+              class="text-slate-600 dark:text-slate-400 leading-relaxed transition-colors"
+            >
+              Selama karier saya, saya sering menangani pengembangan sistem
+              informasi internal (ERP, Dashboard Analytics) hingga website
+              berorientasi pelanggan (E-commerce, Company Profile). Pendekatan
+              saya bukan sekadar menulis kode, melainkan memahami proses bisnis
+              untuk menghasilkan solusi yang benar-benar meningkatkan efisiensi
+              operasional.
+            </p>
+          </div>
+          <!-- Kuadran 4: Terkoneksi -->
+          <div data-aos="fade-up" data-aos-delay="300">
+            <h2
+              class="font-heading text-3xl font-bold text-slate-900 dark:text-white mb-4 transition-colors"
+            >
+              Mari Terkoneksi
+            </h2>
+            <p
+              class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6 transition-colors"
+            >
+              Saya selalu terbuka untuk kolaborasi, diskusi proyek baru, atau
+              peluang karier yang menantang. Jangan ragu untuk menyapa saya
+              melalui jalur profesional di bawah ini.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a
+                href="tel:08817671468"
+                class="w-11 h-11 rounded-full border border-slate-300 dark:border-slate-600 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-brand dark:hover:text-brand-light hover:border-brand dark:hover:border-brand-light hover:bg-brand/5 dark:hover:bg-brand/10 transition-all"
+                ><i class="fa-solid fa-phone"></i
+              ></a>
+              <a
+                href="mailto:indrasetya379@gmail.com"
+                class="w-11 h-11 rounded-full border border-slate-300 dark:border-slate-600 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-brand dark:hover:text-brand-light hover:border-brand dark:hover:border-brand-light hover:bg-brand/5 dark:hover:bg-brand/10 transition-all"
+                ><i class="fa-regular fa-envelope"></i
+              ></a>
+              <a
+                href="https://www.linkedin.com/in/indra-setya-ari-irawan-57a700327"
+                target="_blank"
+                class="w-11 h-11 rounded-full border border-slate-300 dark:border-slate-600 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-brand dark:hover:text-brand-light hover:border-brand dark:hover:border-brand-light hover:bg-brand/5 dark:hover:bg-brand/10 transition-all"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+              <a
+                href="https://github.com/Indra-Setya"
+                target="_blank"
+                class="w-11 h-11 rounded-full border border-slate-300 dark:border-slate-600 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-brand dark:hover:text-brand-light hover:border-brand dark:hover:border-brand-light hover:bg-brand/5 dark:hover:bg-brand/10 transition-all"
+                ><i class="fa-brands fa-github"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/indrasetyaariirawan/"
+                target="_blank"
+                class="w-11 h-11 rounded-full border border-slate-300 dark:border-slate-600 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-brand dark:hover:text-brand-light hover:border-brand dark:hover:border-brand-light hover:bg-brand/5 dark:hover:bg-brand/10 transition-all"
+                ><i class="fa-brands fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PENGALAMAN & PENDIDIKAN SECTION -->
+    <section
+      id="pengalaman"
+      class="py-24 bg-slate-50 dark:bg-slate-900/80 px-4 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2
+            class="font-heading text-3xl lg:text-4xl font-bold mb-4 dark:text-white"
+          >
+            Jejak Langkah
+          </h2>
+          <div
+            class="w-20 h-1.5 bg-brand dark:bg-brand-light mx-auto rounded-full mb-6"
+          ></div>
+          <p
+            class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-lg transition-colors"
+          >
+            Perjalanan karier, eksplorasi profesional, dan latar belakang
+            pendidikan saya.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <!-- Kolom Pengalaman Kerja & Magang -->
+          <div data-aos="fade-up" data-aos-delay="100">
+            <div class="flex items-center gap-4 mb-8">
+              <div
+                class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl shadow-sm flex items-center justify-center border border-slate-100 dark:border-slate-700 transition-colors"
+              >
+                <i
+                  class="fa-solid fa-briefcase text-brand dark:text-brand-light text-xl"
+                ></i>
+              </div>
+              <h3
+                class="font-heading text-2xl font-bold text-slate-900 dark:text-white transition-colors"
+              >
+                Pengalaman Kerja
+              </h3>
+            </div>
+
+            <div
+              class="space-y-10 border-l-2 border-slate-200 dark:border-slate-700 ml-6 pl-8 relative transition-colors"
+            >
+              <!-- Item Pengalaman 1 -->
+              <div class="relative">
+                <!-- Timeline Dot -->
+                <div
+                  class="absolute -left-[41px] bg-white dark:bg-slate-800 border-4 border-brand dark:border-brand-light w-5 h-5 rounded-full top-2 shadow-sm transition-colors"
+                ></div>
+
+                <!-- Header with Logo -->
+                <div class="flex items-start gap-4 mb-3">
+                  <div
+                    class="w-14 h-14 shrink-0 bg-white dark:bg-slate-200 border border-slate-200 dark:border-slate-300 rounded-lg shadow-sm p-1.5 flex items-center justify-center transition-colors"
+                  >
+                    <img
+                      src="IMG\logo bangkit.png"
+                      alt="Logo Bangkit"
+                      class="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+                  <!-- Judul & Info -->
+                  <div class="pt-1">
+                    <h4
+                      class="font-bold text-slate-900 dark:text-white text-lg leading-tight transition-colors"
+                    >
+                      Backend Developer | QA Engineer
+                    </h4>
+                    <div
+                      class="text-brand dark:text-brand-light font-medium text-sm mt-1 transition-colors"
+                    >
+                      Bangkit Academy (Google, GoTo, Traveloka) • Sep 2024 - Jan
+                      2025
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Deskripsi -->
+                <p
+                  class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed transition-colors"
+                >
+                  Merancang arsitektur backend dan mengembangkan RESTful API
+                  menggunakan Node.js untuk Capstone Project (WizzMate).
+                  Melakukan pengujian QA dan mendeploy layanan cloud menggunakan
+                  Google Cloud Platform (GCP).
+                </p>
+              </div>
+
+              <!-- Item Pengalaman 2 -->
+              <div class="relative">
+                <div
+                  class="absolute -left-[41px] bg-white dark:bg-slate-800 border-4 border-slate-300 dark:border-slate-600 w-5 h-5 rounded-full top-2 shadow-sm hover:border-brand dark:hover:border-brand-light transition-colors"
+                ></div>
+
+                <div class="flex items-start gap-4 mb-3">
+                  <div
+                    class="w-14 h-14 shrink-0 bg-white dark:bg-slate-200 border border-slate-200 dark:border-slate-300 rounded-lg shadow-sm p-1.5 flex items-center justify-center transition-colors text-brand font-bold text-xl"
+                  >
+                    PT
+                  </div>
+                  <div class="pt-1">
+                    <h4
+                      class="font-bold text-slate-900 dark:text-white text-lg leading-tight transition-colors"
+                    >
+                      Full Stack Developer
+                    </h4>
+                    <div
+                      class="text-slate-500 dark:text-slate-400 font-medium text-sm mt-1 transition-colors"
+                    >
+                      PT Murgung • Mei 2023 - Sekarang
+                    </div>
+                  </div>
+                </div>
+
+                <p
+                  class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed transition-colors"
+                >
+                  Mengembangkan website *company profile*, merancang sistem
+                  absensi karyawan berbasis pelacakan lokasi GPS, dan membangun
+                  fitur manajemen *payroll* menggunakan stack Laravel, PHP,
+                  MySQL, dan JavaScript.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kolom Pendidikan & Bootcamp -->
+          <div data-aos="fade-up" data-aos-delay="200">
+            <div class="flex items-center gap-4 mb-8">
+              <div
+                class="w-12 h-12 bg-white dark:bg-slate-800 rounded-xl shadow-sm flex items-center justify-center border border-slate-100 dark:border-slate-700 transition-colors"
+              >
+                <i
+                  class="fa-solid fa-graduation-cap text-brand dark:text-brand-light text-xl"
+                ></i>
+              </div>
+              <h3
+                class="font-heading text-2xl font-bold text-slate-900 dark:text-white transition-colors"
+              >
+                Pendidikan & Program
+              </h3>
+            </div>
+
+            <div
+              class="space-y-10 border-l-2 border-slate-200 dark:border-slate-700 ml-6 pl-8 relative transition-colors"
+            >
+              <!-- Item Pendidikan 1 -->
+              <div class="relative">
+                <div
+                  class="absolute -left-[41px] bg-white dark:bg-slate-800 border-4 border-brand dark:border-brand-light w-5 h-5 rounded-full top-2 shadow-sm transition-colors"
+                ></div>
+
+                <div class="flex items-start gap-4 mb-3">
+                  <div
+                    class="w-14 h-14 shrink-0 bg-white dark:bg-slate-200 border border-slate-200 dark:border-slate-300 rounded-lg shadow-sm p-1.5 flex items-center justify-center transition-colors"
+                  >
+                    <img
+                      src="IMG\logo UAD.png"
+                      alt="Logo UAD"
+                      class="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+                  <div class="pt-1">
+                    <h4
+                      class="font-bold text-slate-900 dark:text-white text-lg leading-tight transition-colors"
+                    >
+                      Bachelor of Informatics Engineering
+                    </h4>
+                    <div
+                      class="text-brand dark:text-brand-light font-medium text-sm mt-1 transition-colors"
+                    >
+                      Universitas Ahmad Dahlan • Sep 2022 - Agt 2026
+                    </div>
+                  </div>
+                </div>
+
+                <p
+                  class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed transition-colors"
+                >
+                  Mendapatkan IPK 3.59. Mendalami peminatan Rekayasa Perangkat
+                  Lunak, Kecerdasan Buatan (AI), Natural Language Processing
+                  (NLP), serta Keamanan Komputer.
+                </p>
+              </div>
+
+              <!-- Item Pendidikan 2 (Bangkit) -->
+              <div class="relative">
+                <div
+                  class="absolute -left-[41px] bg-white dark:bg-slate-800 border-4 border-slate-300 dark:border-slate-600 w-5 h-5 rounded-full top-2 shadow-sm hover:border-brand dark:hover:border-brand-light transition-colors"
+                ></div>
+
+                <div class="flex items-start gap-4 mb-3">
+                  <div
+                    class="w-14 h-14 shrink-0 bg-white dark:bg-slate-200 border border-slate-200 dark:border-slate-300 rounded-lg shadow-sm p-1.5 flex items-center justify-center transition-colors"
+                  >
+                    <img
+                      src="IMG\logo bangkit.png"
+                      alt="Logo Bootcamp"
+                      class="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+                  <div class="pt-1">
+                    <h4
+                      class="font-bold text-slate-900 dark:text-white text-lg leading-tight transition-colors"
+                    >
+                      Cloud Computing Cohort
+                    </h4>
+                    <div
+                      class="text-slate-500 dark:text-slate-400 font-medium text-sm mt-1 transition-colors"
+                    >
+                      Bangkit Academy 2024 (Batch 2) • Sep 2024 - Jan 2025
+                    </div>
+                  </div>
+                </div>
+
+                <p
+                  class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed transition-colors"
+                >
+                  Program intensif dari Google, Tokopedia, Gojek & Traveloka.
+                  Tersertifikasi sebagai Google Cloud Engineer dan berfokus pada
+                  pengembangan backend, API, serta *deployment* cloud.
+                </p>
+              </div>
+
+              <!-- Item Pendidikan 3 -->
+              <div class="relative">
+                <div
+                  class="absolute -left-[41px] bg-white dark:bg-slate-800 border-4 border-slate-300 dark:border-slate-600 w-5 h-5 rounded-full top-2 shadow-sm hover:border-brand dark:hover:border-brand-light transition-colors"
+                ></div>
+
+                <div class="flex items-start gap-4 mb-3">
+                  <div
+                    class="w-14 h-14 shrink-0 bg-white dark:bg-slate-200 border border-slate-200 dark:border-slate-300 rounded-lg shadow-sm p-1.5 flex items-center justify-center transition-colors"
+                  >
+                    <img
+                      src="IMG\Logo SMA.png"
+                      alt="Logo SMA"
+                      class="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+                  <div class="pt-1">
+                    <h4
+                      class="font-bold text-slate-900 dark:text-white text-lg leading-tight transition-colors"
+                    >
+                      Jurusan MIPA (Science)
+                    </h4>
+                    <div
+                      class="text-slate-500 dark:text-slate-400 font-medium text-sm mt-1 transition-colors"
+                    >
+                      SMA N1 Ngawen • 2020 - 2024
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proyek Section -->
+    <section
+      id="proyek"
+      class="py-24 bg-slate-900 dark:bg-[#0b1120] text-white px-4 transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="font-heading text-3xl lg:text-4xl font-bold mb-4">
+            Karya Pilihan
+          </h2>
+          <div class="w-20 h-1.5 bg-brand mx-auto rounded-full mb-6"></div>
+          <p class="text-slate-400 max-w-2xl mx-auto text-lg">
+            Beberapa studi kasus dan proyek unggulan yang telah saya bangun,
+            berfokus pada AI, Backend, dan rekayasa perangkat lunak.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Card Proyek 1: AI Moodle Plugin -->
+          <div
+            class="bg-slate-800 dark:bg-slate-800/60 rounded-2xl overflow-hidden group border border-slate-700 hover:border-brand/50 dark:hover:border-brand/80 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand/20 dark:hover:shadow-[0_0_20px_rgba(79,70,229,0.2)]"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="relative h-56 overflow-hidden">
+              <div
+                class="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-colors z-10"
+              ></div>
+              <!-- Saran: ganti src dengan gambar proyek nyata Anda nanti -->
+              <img
+                src="IMG\Proyek 1.png"
+                alt="AI Moodle Plugin"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div class="absolute top-4 left-4 z-20 flex gap-2">
+                <span
+                  class="bg-brand/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
+                  >Python / Flask</span
+                >
+                <span
+                  class="bg-green-600/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
+                  >AI & NLP</span
+                >
+              </div>
+            </div>
+            <div class="p-6 flex flex-col h-[calc(100%-14rem)] justify-between">
+              <div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-white">
+                  Edu Video Recommendation Plugin (LMS Moodle)
+                </h3>
+                <p class="text-slate-400 text-sm mb-6 line-clamp-4">
+                  Plugin Moodle berbasis AI untuk merekomendasikan video YouTube
+                  edukatif. Dibangun dengan analisis sentimen menggunakan
+                  IndoBERT, pencarian kesamaan semantik (FastText), dan
+                  integrasi RESTful API.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between border-t border-slate-700 pt-4 mt-auto"
+              >
+                <span class="text-xs text-slate-500"
+                  >AI / Backend Engineer</span
+                >
+                <a
+                  href="#"
+                  class="text-slate-400 hover:text-white transition-colors"
+                  ><i class="fa-brands fa-github text-xl"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Proyek 2: WizzMate -->
+          <div
+            class="bg-slate-800 dark:bg-slate-800/60 rounded-2xl overflow-hidden group border border-slate-700 hover:border-brand/50 dark:hover:border-brand/80 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand/20 dark:hover:shadow-[0_0_20px_rgba(79,70,229,0.2)]"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="relative h-56 overflow-hidden">
+              <div
+                class="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-colors z-10"
+              ></div>
+              <!-- Saran: ganti src dengan gambar proyek nyata Anda nanti -->
+              <img
+                src="IMG\Screenshot 2026-02-04 125425.png"
+                alt="WizzMate Capstone"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div class="absolute top-4 left-4 z-20 flex gap-2">
+                <span
+                  class="bg-blue-600/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
+                  >Node.js</span
+                >
+                <span
+                  class="bg-orange-500/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
+                  >GCP</span
+                >
+              </div>
+            </div>
+            <div class="p-6 flex flex-col h-[calc(100%-14rem)] justify-between">
+              <div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-white">
+                  WizzMate: Intelligent Travel Guide
+                </h3>
+                <p class="text-slate-400 text-sm mb-6 line-clamp-4">
+                  Platform cerdas untuk rekomendasi pariwisata dan estimasi
+                  biaya wisata di Indonesia. Saya bertugas merancang dan
+                  menyebarkan RESTful API menggunakan Node.js ke layanan Google
+                  Cloud Platform (GCP).
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between border-t border-slate-700 pt-4 mt-auto"
+              >
+                <span class="text-xs text-slate-500"
+                  >Capstone Bangkit 2024</span
+                >
+                <a
+                  href="#"
+                  class="text-slate-400 hover:text-white transition-colors"
+                  ><i class="fa-brands fa-github text-xl"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Proyek 3: LongoMate -->
+          <div
+            class="bg-slate-800 dark:bg-slate-800/60 rounded-2xl overflow-hidden group border border-slate-700 hover:border-brand/50 dark:hover:border-brand/80 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand/20 dark:hover:shadow-[0_0_20px_rgba(79,70,229,0.2)]"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div class="relative h-56 overflow-hidden">
+              <div
+                class="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-colors z-10"
+              ></div>
+              <!-- Saran: ganti src dengan gambar proyek nyata Anda nanti -->
+              <img
+                src="IMG\Proyek 3.png"
+                alt="LongoMate App"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div class="absolute top-4 left-4 z-20 flex gap-2">
+                <span
+                  class="bg-purple-600/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
+                  >Kotlin</span
+                >
+                <span
+                  class="bg-yellow-600/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
+                  >Firebase</span
+                >
+              </div>
+            </div>
+            <div class="p-6 flex flex-col h-[calc(100%-14rem)] justify-between">
+              <div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-white">
+                  LongoMate – Language Learning App
+                </h3>
+                <p class="text-slate-400 text-sm mb-6 line-clamp-4">
+                  Aplikasi mobile interaktif untuk belajar bahasa asing.
+                  Terintegrasi dengan kamus dwibahasa, modul *speaking, writing,
+                  listening*, serta menggunakan sistem poin berbasis gamifikasi
+                  untuk motivasi pengguna.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between border-t border-slate-700 pt-4 mt-auto"
+              >
+                <span class="text-xs text-slate-500">Mobile Developer</span>
+                <a
+                  href="#"
+                  class="text-slate-400 hover:text-white transition-colors"
+                  ><i class="fa-brands fa-github text-xl"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <a
+            href="https://github.com/Indra-Setya"
+            target="_blank"
+            class="inline-flex items-center gap-2 border-2 border-slate-600 dark:border-slate-700 hover:border-brand hover:bg-brand text-white px-6 py-3 rounded-full font-medium transition-all"
+          >
+            Lihat Proyek Lainnya di GitHub
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG SECTION -->
+    <section
+      id="blog"
+      class="py-24 bg-white dark:bg-slate-900 px-4 transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto">
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12"
+          data-aos="fade-up"
+        >
+          <div class="mb-4 md:mb-0">
+            <h2
+              class="font-heading text-3xl lg:text-4xl font-bold mb-4 text-slate-900 dark:text-white transition-colors"
+            >
+              Jurnal & Wawasan
+            </h2>
+            <div
+              class="w-20 h-1.5 bg-brand dark:bg-brand-light rounded-full"
+            ></div>
+          </div>
+          <a
+            href="#"
+            class="inline-flex items-center gap-2 text-brand dark:text-brand-light font-medium hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
+          >
+            Lihat Semua Artikel <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Artikel 1 -->
+          <article
+            class="bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="relative h-48 overflow-hidden">
+              <img
+                src="https://via.placeholder.com/600x400"
+                alt="Blog 1"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-brand dark:text-brand-light shadow-sm"
+              >
+                Tutorial
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="text-sm text-slate-400 mb-3">
+                <i class="fa-regular fa-calendar mr-2"></i>12 Mei 2024
+              </div>
+              <h3
+                class="font-heading text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-brand dark:group-hover:text-brand-light transition-colors cursor-pointer"
+              >
+                [Judul Artikel Blog Anda Disini]
+              </h3>
+              <p
+                class="text-slate-600 dark:text-slate-400 text-sm mb-6 line-clamp-3 transition-colors"
+              >
+                Deskripsi singkat mengenai isi artikel blog Anda. Menjelaskan
+                poin-poin penting yang dibahas dalam tulisan ini agar pembaca
+                tertarik membaca.
+              </p>
+              <a
+                href="#"
+                class="text-brand dark:text-brand-light font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all"
+                >Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i
+              ></a>
+            </div>
+          </article>
+
+          <!-- Artikel 2 -->
+          <article
+            class="bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="relative h-48 overflow-hidden">
+              <img
+                src="https://via.placeholder.com/600x400"
+                alt="Blog 2"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-brand dark:text-brand-light shadow-sm"
+              >
+                Karir IT
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="text-sm text-slate-400 mb-3">
+                <i class="fa-regular fa-calendar mr-2"></i>05 April 2024
+              </div>
+              <h3
+                class="font-heading text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-brand dark:group-hover:text-brand-light transition-colors cursor-pointer"
+              >
+                Cara Bertahan Sebagai Developer di Era AI
+              </h3>
+              <p
+                class="text-slate-600 dark:text-slate-400 text-sm mb-6 line-clamp-3 transition-colors"
+              >
+                Bagaimana AI mengubah lanskap industri rekayasa perangkat lunak
+                dan apa saja skill yang perlu kita adaptasi untuk tetap relevan.
+              </p>
+              <a
+                href="#"
+                class="text-brand dark:text-brand-light font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all"
+                >Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i
+              ></a>
+            </div>
+          </article>
+
+          <!-- Artikel 3 -->
+          <article
+            class="bg-white dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div class="relative h-48 overflow-hidden">
+              <img
+                src="https://via.placeholder.com/600x400"
+                alt="Blog 3"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div
+                class="absolute top-4 left-4 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-brand dark:text-brand-light shadow-sm"
+              >
+                Studi Kasus
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="text-sm text-slate-400 mb-3">
+                <i class="fa-regular fa-calendar mr-2"></i>20 Maret 2024
+              </div>
+              <h3
+                class="font-heading text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-brand dark:group-hover:text-brand-light transition-colors cursor-pointer"
+              >
+                Optimasi Query Database Pada Aplikasi Skala Besar
+              </h3>
+              <p
+                class="text-slate-600 dark:text-slate-400 text-sm mb-6 line-clamp-3 transition-colors"
+              >
+                Mempelajari teknik normalisasi, indexing, dan N+1 query problem
+                pada framework MVC agar waktu muat aplikasi menjadi lebih cepat.
+              </p>
+              <a
+                href="#"
+                class="text-brand dark:text-brand-light font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all"
+                >Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i
+              ></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kontak CTA -->
+    <section
+      id="kontak"
+      class="py-24 bg-slate-50 dark:bg-slate-800/50 px-4 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300"
+    >
+      <div class="max-w-5xl mx-auto" data-aos="zoom-in" data-aos-duration="800">
+        <div
+          class="bg-gradient-to-br from-slate-900 to-indigo-950 rounded-3xl p-10 md:p-16 text-center shadow-2xl relative overflow-hidden"
+        >
+          <!-- Dekorasi -->
+          <div
+            class="absolute top-0 right-0 w-64 h-64 bg-brand/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"
+          ></div>
+          <div
+            class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"
+          ></div>
+
+          <h2
+            class="font-heading text-3xl md:text-5xl font-bold text-white mb-6 relative z-10"
+          >
+            Punya Ide Proyek Brilian?
+          </h2>
+          <p
+            class="text-slate-300 text-lg mb-10 max-w-2xl mx-auto relative z-10"
+          >
+            Baik Anda sedang mencari talenta untuk bergabung dengan tim Anda,
+            atau ingin mewujudkan ide menjadi produk nyata, kotak masuk saya
+            selalu terbuka.
+          </p>
+
+          <div
+            class="flex flex-col sm:flex-row gap-4 justify-center relative z-10"
+          >
+            <a
+              href="mailto:indrasetya379@gmail.com"
+              class="bg-brand hover:bg-indigo-500 text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg flex items-center justify-center gap-2 text-lg"
+            >
+              <i class="fa-solid fa-envelope"></i> Kirim Email
+            </a>
+            <a
+              href="https://wa.me/08817671468"
+              target="_blank"
+              class="bg-green-500 hover:bg-green-400 text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg flex items-center justify-center gap-2 text-lg"
+            >
+              <i class="fa-brands fa-whatsapp text-xl"></i> WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-slate-900 border-t border-slate-800 py-10 text-center text-slate-400 text-sm transition-colors duration-300"
+    >
+      <p>
+        Dirancang & Dikembangkan oleh
+        <span class="font-bold text-white">Indra Setya Ari Irawan</span> &copy;
+        2025
+      </p>
+      <p class="mt-1">Dibuat dengan Tailwind CSS & Kreativitas.</p>
+    </footer>
+
+    <!-- Script Animasi AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+        offset: 100,
+      });
+
+      // --- LOGIKA UNTUK DARK MODE TOGGLE ---
+      const themeToggleBtn = document.getElementById("theme-toggle");
+      const darkIcon = document.getElementById("theme-toggle-dark-icon");
+      const lightIcon = document.getElementById("theme-toggle-light-icon");
+
+      // Set icon awal berdasarkan status tema
+      if (document.documentElement.classList.contains("dark")) {
+        lightIcon.classList.remove("hidden");
+      } else {
+        darkIcon.classList.remove("hidden");
+      }
+
+      themeToggleBtn.addEventListener("click", function () {
+        // Toggle Icon
+        darkIcon.classList.toggle("hidden");
+        lightIcon.classList.toggle("hidden");
+
+        // Toggle Tema
+        if (document.documentElement.classList.contains("dark")) {
+          document.documentElement.classList.remove("dark");
+          localStorage.setItem("theme", "light");
+        } else {
+          document.documentElement.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+        }
+      });
+    </script>
+  </body>
+</html>
