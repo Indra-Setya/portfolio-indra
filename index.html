@@ -199,18 +199,6 @@
         );
       }
     </style>
-
-    <script>
-      if (
-        localStorage.getItem("theme") === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    </script>
   </head>
 
   <body
@@ -299,7 +287,7 @@
       </div>
     </nav>
 
-    <!-- Hero Section (Dengan Aurora Animasi & Typing Effect) -->
+    <!-- Hero Section -->
     <section
       id="beranda"
       class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden px-4 transition-colors duration-300"
@@ -348,8 +336,8 @@
             <strong class="text-brand dark:text-brand-light"
               ><span id="typed-text"></span
             ></strong>
-            lulusan IT yang berfokus pada pengembangan sistem, infrastruktur
-            Cloud, dan Kecerdasan Buatan.
+            berfokus pada pengembangan sistem Backend, infrastruktur Cloud
+            (GCP), integrasi AI, dan aplikasi terdepan.
           </p>
           <div
             class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
@@ -410,7 +398,6 @@
     >
       <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-16">
-          <!-- Kuadran 1: Tentang & Terminal & Github -->
           <div data-aos="fade-up">
             <span
               class="text-brand dark:text-brand-light font-bold text-sm tracking-widest uppercase mb-3 block"
@@ -422,7 +409,6 @@
               Pengembang Digital & Pecinta Solusi Cerdas
             </h2>
 
-            <!-- Terminal Code Window -->
             <div
               class="bg-slate-900 rounded-xl overflow-hidden shadow-xl border border-slate-700 mb-8 transform transition hover:scale-[1.02] duration-300"
             >
@@ -450,7 +436,8 @@
                 <p class="ml-4">
                   focus: [<span class="text-green-300">'Backend'</span>,
                   <span class="text-green-300">'AI'</span>,
-                  <span class="text-green-300">'Cloud'</span>],
+                  <span class="text-green-300">'Cloud'</span>,
+                  <span class="text-green-300">'Mobile'</span>],
                 </p>
                 <p class="ml-4">
                   status:
@@ -470,7 +457,6 @@
               dan berpusat pada pengguna.
             </p>
 
-            <!-- GitHub Stats Graph -->
             <div
               class="mt-8 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-slate-50 dark:bg-slate-900 p-2 transform transition hover:-translate-y-1 hover:shadow-lg duration-300 relative z-10"
             >
@@ -484,7 +470,6 @@
                   alt="GitHub Stats"
                   class="w-full object-contain block dark:hidden pointer-events-none"
                 />
-                <!-- Dark mode image -->
                 <img
                   src="https://github-readme-stats.vercel.app/api?username=Indra-Setya&show_icons=true&theme=transparent&hide_border=true&title_color=818cf8&text_color=94a3b8&icon_color=818cf8"
                   alt="GitHub Stats Dark"
@@ -494,7 +479,6 @@
             </div>
           </div>
 
-          <!-- Kuadran 2: Tech Stack -->
           <div data-aos="fade-up" data-aos-delay="100">
             <h2
               class="font-heading text-3xl font-bold text-slate-900 dark:text-white mb-4 transition-colors"
@@ -589,14 +573,12 @@
               </div>
             </div>
 
-            <!-- Infinite Marquee (Icons) -->
             <div
               class="mt-8 overflow-hidden relative w-full py-4 before:absolute before:left-0 before:top-0 before:w-16 before:h-full before:bg-gradient-to-r before:from-white before:to-transparent dark:before:from-slate-800 dark:before:to-transparent before:z-10 after:absolute after:right-0 after:top-0 after:w-16 after:h-full after:bg-gradient-to-l after:from-white after:to-transparent dark:after:from-slate-800 dark:after:to-transparent after:z-10"
             >
               <div
                 class="flex w-[200%] gap-8 animate-infinite-scroll text-4xl text-slate-400 dark:text-slate-500"
               >
-                <!-- Group 1 -->
                 <i
                   class="fa-brands fa-node hover:text-green-500 transition-colors"
                 ></i>
@@ -627,7 +609,7 @@
                 <i
                   class="fa-brands fa-git-alt hover:text-orange-600 transition-colors"
                 ></i>
-                <!-- Group 2 -->
+                <!-- Duplicate for seamless scroll -->
                 <i
                   class="fa-brands fa-node hover:text-green-500 transition-colors"
                 ></i>
@@ -689,7 +671,6 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          <!-- Kolom Pengalaman Kerja -->
           <div data-aos="fade-up" data-aos-delay="100">
             <div class="flex items-center gap-4 mb-8">
               <div
@@ -785,7 +766,6 @@
             </div>
           </div>
 
-          <!-- Kolom Pendidikan -->
           <div data-aos="fade-up" data-aos-delay="200">
             <div class="flex items-center gap-4 mb-8">
               <div
@@ -879,7 +859,7 @@
       </div>
     </section>
 
-    <!-- Proyek Section (Dengan Tilt & Spotlight) -->
+    <!-- Proyek Section (Lengkap 6 Proyek) -->
     <section
       id="proyek"
       class="py-24 bg-slate-900 dark:bg-[#0b1120] text-white px-4 transition-colors duration-300"
@@ -891,13 +871,13 @@
           </h2>
           <div class="w-20 h-1.5 bg-brand mx-auto rounded-full mb-6"></div>
           <p class="text-slate-400 max-w-2xl mx-auto text-lg">
-            Beberapa studi kasus dan proyek unggulan yang telah saya bangun
-            dengan teknologi modern.
+            Koleksi proyek nyata dan studi kasus yang mencerminkan kapabilitas
+            teknis saya secara menyeluruh.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Card Proyek 1 -->
+          <!-- Card Proyek 1: Edu Video Plugin -->
           <div
             data-tilt
             data-tilt-max="5"
@@ -922,7 +902,7 @@
               >
                 <span
                   class="bg-brand/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
-                  >Python / Flask</span
+                  >Python</span
                 >
                 <span
                   class="bg-green-600/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
@@ -939,7 +919,8 @@
                 </h3>
                 <p class="text-slate-400 text-sm mb-6 line-clamp-4">
                   Plugin Moodle berbasis AI untuk rekomendasi video YouTube
-                  edukatif dengan analisis sentimen IndoBERT & FastText.
+                  edukatif dengan analisis sentimen menggunakan IndoBERT &
+                  kesamaan semantik FastText.
                 </p>
               </div>
               <div
@@ -958,7 +939,7 @@
             </div>
           </div>
 
-          <!-- Card Proyek 2 -->
+          <!-- Card Proyek 2: WizzMate -->
           <div
             data-tilt
             data-tilt-max="5"
@@ -996,20 +977,18 @@
             >
               <div>
                 <h3 class="font-heading text-xl font-bold mb-3 text-white">
-                  WizzMate: Intelligent Travel Guide
+                  WizzMate: Travel Guide API
                 </h3>
                 <p class="text-slate-400 text-sm mb-6 line-clamp-4">
-                  Platform cerdas untuk rekomendasi pariwisata. Merancang &
-                  deploy RESTful API menggunakan Node.js ke layanan Google Cloud
-                  Platform.
+                  Platform cerdas untuk rekomendasi pariwisata (Capstone).
+                  Bertugas merancang, menguji reliabilitas, & deploy RESTful API
+                  menggunakan Node.js ke Google Cloud.
                 </p>
               </div>
               <div
                 class="flex items-center justify-between border-t border-slate-700 pt-4 mt-auto"
               >
-                <span class="text-xs text-slate-500"
-                  >Capstone Bangkit 2024</span
-                >
+                <span class="text-xs text-slate-500">Backend / Cloud Dev</span>
                 <a
                   href="https://github.com/Iq11k/Capstone-WizzMate"
                   target="_blank"
@@ -1020,7 +999,7 @@
             </div>
           </div>
 
-          <!-- Card Proyek 3 -->
+          <!-- Card Proyek 3: LongoMate -->
           <div
             data-tilt
             data-tilt-max="5"
@@ -1058,11 +1037,12 @@
             >
               <div>
                 <h3 class="font-heading text-xl font-bold mb-3 text-white">
-                  LongoMate – Language Learning App
+                  LongoMate – Language Learning
                 </h3>
                 <p class="text-slate-400 text-sm mb-6 line-clamp-4">
-                  Aplikasi mobile interaktif untuk belajar bahasa asing dengan
-                  modul speaking, writing, dan sistem gamifikasi.
+                  Aplikasi mobile Android interaktif untuk belajar bahasa dengan
+                  modul speaking, writing, kamus dwibahasa, dan sistem poin
+                  gamifikasi.
                 </p>
               </div>
               <div
@@ -1078,17 +1058,195 @@
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="text-center mt-12">
-          <a
-            href="https://github.com/Indra-Setya"
-            target="_blank"
-            class="inline-flex items-center gap-2 border-2 border-slate-600 dark:border-slate-700 hover:border-brand hover:bg-brand text-white px-6 py-3 rounded-full font-medium transition-all"
+          <!-- Card Proyek 4: ConstMG -->
+          <div
+            data-tilt
+            data-tilt-max="5"
+            data-tilt-speed="400"
+            data-tilt-glare="true"
+            data-tilt-max-glare="0.2"
+            class="spotlight-card bg-slate-800 dark:bg-slate-800/60 rounded-2xl overflow-hidden border border-slate-700 hover:border-brand/80 transition-all shadow-xl hover:shadow-brand/20 group"
+            data-aos="fade-up"
+            data-aos-delay="100"
           >
-            Lihat Proyek Lainnya di GitHub
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
+            <div
+              class="relative h-56 overflow-hidden z-20 pointer-events-none bg-slate-700 flex items-center justify-center"
+            >
+              <div
+                class="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-colors z-10 pointer-events-none"
+              ></div>
+              <!-- Placeholder: Ganti dengan IMG/Proyek 4.png jika ada gambarnya -->
+              <div
+                class="text-slate-500 text-5xl group-hover:scale-110 transition-transform duration-500"
+              >
+                <i class="fa-solid fa-helmet-safety"></i>
+              </div>
+              <div
+                class="absolute top-4 left-4 z-20 flex gap-2 pointer-events-none"
+              >
+                <span
+                  class="bg-red-600/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
+                  >Laravel</span
+                >
+                <span
+                  class="bg-orange-500/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
+                  >MySQL</span
+                >
+              </div>
+            </div>
+            <div
+              class="p-6 flex flex-col h-[calc(100%-14rem)] justify-between relative z-20"
+            >
+              <div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-white">
+                  ConstMG – Construction Management
+                </h3>
+                <p class="text-slate-400 text-sm mb-6 line-clamp-4">
+                  Sistem manajemen konstruksi yang dikembangkan untuk
+                  memfasilitasi bisnis klien nyata. Bertanggung jawab dalam
+                  merancang database dan RESTful API backend.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between border-t border-slate-700 pt-4 mt-auto"
+              >
+                <span class="text-xs text-slate-500">Backend Developer</span>
+                <a
+                  href="https://github.com/Indra-Setya"
+                  target="_blank"
+                  class="text-slate-400 hover:text-white transition-colors relative z-30 cursor-pointer"
+                  ><i class="fa-brands fa-github text-xl"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Proyek 5: PT Murgung ERP -->
+          <div
+            data-tilt
+            data-tilt-max="5"
+            data-tilt-speed="400"
+            data-tilt-glare="true"
+            data-tilt-max-glare="0.2"
+            class="spotlight-card bg-slate-800 dark:bg-slate-800/60 rounded-2xl overflow-hidden border border-slate-700 hover:border-brand/80 transition-all shadow-xl hover:shadow-brand/20 group"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div
+              class="relative h-56 overflow-hidden z-20 pointer-events-none bg-slate-700 flex items-center justify-center"
+            >
+              <div
+                class="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-colors z-10 pointer-events-none"
+              ></div>
+              <!-- Placeholder: Ganti dengan IMG/Proyek 5.png jika ada gambarnya -->
+              <div
+                class="text-slate-500 text-5xl group-hover:scale-110 transition-transform duration-500"
+              >
+                <i class="fa-solid fa-network-wired"></i>
+              </div>
+              <div
+                class="absolute top-4 left-4 z-20 flex gap-2 pointer-events-none"
+              >
+                <span
+                  class="bg-red-600/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
+                  >PHP</span
+                >
+                <span
+                  class="bg-sky-500/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
+                  >GPS Location</span
+                >
+              </div>
+            </div>
+            <div
+              class="p-6 flex flex-col h-[calc(100%-14rem)] justify-between relative z-20"
+            >
+              <div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-white">
+                  PT Murgung - ERP & Profile Web
+                </h3>
+                <p class="text-slate-400 text-sm mb-6 line-clamp-4">
+                  Sistem operasional menyeluruh mencakup website profil bisnis
+                  perusahaan, sistem absensi karyawan dengan pelacakan lokasi
+                  GPS, dan fungsionalitas manajemen payroll.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between border-t border-slate-700 pt-4 mt-auto"
+              >
+                <span class="text-xs text-slate-500">Full Stack Developer</span>
+                <a
+                  href="https://github.com/Indra-Setya"
+                  target="_blank"
+                  class="text-slate-400 hover:text-white transition-colors relative z-30 cursor-pointer"
+                  ><i class="fa-brands fa-github text-xl"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Proyek 6: Desktop Cashier -->
+          <div
+            data-tilt
+            data-tilt-max="5"
+            data-tilt-speed="400"
+            data-tilt-glare="true"
+            data-tilt-max-glare="0.2"
+            class="spotlight-card bg-slate-800 dark:bg-slate-800/60 rounded-2xl overflow-hidden border border-slate-700 hover:border-brand/80 transition-all shadow-xl hover:shadow-brand/20 group"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div
+              class="relative h-56 overflow-hidden z-20 pointer-events-none bg-slate-700 flex items-center justify-center"
+            >
+              <div
+                class="absolute inset-0 bg-slate-900/40 group-hover:bg-transparent transition-colors z-10 pointer-events-none"
+              ></div>
+              <!-- Placeholder: Ganti dengan IMG/Proyek 6.png jika ada gambarnya -->
+              <div
+                class="text-slate-500 text-5xl group-hover:scale-110 transition-transform duration-500"
+              >
+                <i class="fa-solid fa-cash-register"></i>
+              </div>
+              <div
+                class="absolute top-4 left-4 z-20 flex gap-2 pointer-events-none"
+              >
+                <span
+                  class="bg-blue-800/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
+                  >C++</span
+                >
+                <span
+                  class="bg-indigo-600/90 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-medium"
+                  >OOP</span
+                >
+              </div>
+            </div>
+            <div
+              class="p-6 flex flex-col h-[calc(100%-14rem)] justify-between relative z-20"
+            >
+              <div>
+                <h3 class="font-heading text-xl font-bold mb-3 text-white">
+                  Desktop Cashier System
+                </h3>
+                <p class="text-slate-400 text-sm mb-6 line-clamp-4">
+                  Aplikasi kasir desktop yang dibangun secara mandiri.
+                  Menerapkan konsep Object-Oriented Programming (OOP) untuk
+                  operasi pengelolaan transaksi dan kasir.
+                </p>
+              </div>
+              <div
+                class="flex items-center justify-between border-t border-slate-700 pt-4 mt-auto"
+              >
+                <span class="text-xs text-slate-500">Software Developer</span>
+                <a
+                  href="https://github.com/Indra-Setya"
+                  target="_blank"
+                  class="text-slate-400 hover:text-white transition-colors relative z-30 cursor-pointer"
+                  ><i class="fa-brands fa-github text-xl"></i
+                ></a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1151,7 +1309,6 @@
               09/2024 - Sekarang
             </div>
           </article>
-
           <article
             data-tilt
             data-tilt-max="3"
@@ -1181,7 +1338,6 @@
               11/2024 - 11/2027
             </div>
           </article>
-
           <article
             data-tilt
             data-tilt-max="3"
@@ -1211,7 +1367,6 @@
               11/2024 - 11/2027
             </div>
           </article>
-
           <article
             data-tilt
             data-tilt-max="3"
@@ -1241,7 +1396,6 @@
               10/2024 - 10/2027
             </div>
           </article>
-
           <article
             data-tilt
             data-tilt-max="3"
@@ -1271,7 +1425,6 @@
               10/2024 - 10/2027
             </div>
           </article>
-
           <article
             data-tilt
             data-tilt-max="3"
@@ -1301,7 +1454,6 @@
               09/2024 - 09/2027
             </div>
           </article>
-
           <article
             data-tilt
             data-tilt-max="3"
@@ -1331,7 +1483,6 @@
               09/2024 - 09/2027
             </div>
           </article>
-
           <article
             data-tilt
             data-tilt-max="3"
@@ -1361,7 +1512,6 @@
               09/2024 - 09/2027
             </div>
           </article>
-
           <article
             data-tilt
             data-tilt-max="3"
@@ -1420,7 +1570,7 @@
             <div class="space-y-6">
               <a
                 href="mailto:indrasetya379@gmail.com"
-                class="flex items-center gap-4 text-slate-700 dark:text-slate-300 hover:text-brand transition-colors"
+                class="flex items-center gap-4 text-slate-700 dark:text-slate-300 hover:text-brand transition-colors relative z-20"
               >
                 <div
                   class="w-12 h-12 bg-indigo-50 dark:bg-slate-800 rounded-full flex items-center justify-center text-brand"
@@ -1432,7 +1582,7 @@
               <a
                 href="https://wa.me/628817671468"
                 target="_blank"
-                class="flex items-center gap-4 text-slate-700 dark:text-slate-300 hover:text-brand transition-colors"
+                class="flex items-center gap-4 text-slate-700 dark:text-slate-300 hover:text-brand transition-colors relative z-20"
               >
                 <div
                   class="w-12 h-12 bg-indigo-50 dark:bg-slate-800 rounded-full flex items-center justify-center text-brand"
@@ -1444,7 +1594,7 @@
               <a
                 href="https://www.linkedin.com/in/indra-setya-ari-irawan-57a700327"
                 target="_blank"
-                class="flex items-center gap-4 text-slate-700 dark:text-slate-300 hover:text-brand transition-colors"
+                class="flex items-center gap-4 text-slate-700 dark:text-slate-300 hover:text-brand transition-colors relative z-20"
               >
                 <div
                   class="w-12 h-12 bg-indigo-50 dark:bg-slate-800 rounded-full flex items-center justify-center text-brand"
@@ -1477,7 +1627,7 @@
                     type="text"
                     name="name"
                     required
-                    class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-brand outline-none transition-all text-slate-900 dark:text-white"
+                    class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-brand outline-none transition-all text-slate-900 dark:text-white relative z-20"
                   />
                 </div>
                 <div>
@@ -1489,7 +1639,7 @@
                     type="email"
                     name="email"
                     required
-                    class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-brand outline-none transition-all text-slate-900 dark:text-white"
+                    class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-brand outline-none transition-all text-slate-900 dark:text-white relative z-20"
                   />
                 </div>
               </div>
@@ -1502,7 +1652,7 @@
                   name="message"
                   rows="4"
                   required
-                  class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-brand outline-none transition-all text-slate-900 dark:text-white resize-none"
+                  class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-brand outline-none transition-all text-slate-900 dark:text-white resize-none relative z-20"
                 ></textarea>
               </div>
               <input
@@ -1513,7 +1663,7 @@
               />
               <button
                 type="submit"
-                class="w-full bg-brand hover:bg-indigo-700 text-white font-bold py-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                class="w-full bg-brand hover:bg-indigo-700 text-white font-bold py-4 rounded-lg transition-colors flex items-center justify-center gap-2 relative z-20"
               >
                 Kirim Pesan <i class="fa-solid fa-paper-plane"></i>
               </button>
@@ -1543,16 +1693,15 @@
       <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <!-- Scripts: AOS, Vanilla Tilt, Typed.js -->
+    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 
     <script>
-      // 1. Inisialisasi AOS (Animasi Scroll)
       AOS.init({ once: true, offset: 50 });
 
-      // 2. Typing Effect (Typed.js)
+      // Typing Effect
       var typed = new Typed("#typed-text", {
         strings: [
           "Software Engineer",
@@ -1568,7 +1717,7 @@
         cursorChar: "|",
       });
 
-      // 3. Logika Dark Mode
+      // Dark Mode Logic
       const themeToggleBtn = document.getElementById("theme-toggle");
       const darkIcon = document.getElementById("theme-toggle-dark-icon");
       const lightIcon = document.getElementById("theme-toggle-light-icon");
@@ -1592,7 +1741,7 @@
         }
       });
 
-      // 4. Logika Progress Bar & Back To Top
+      // Progress Bar & Back To Top
       window.addEventListener("scroll", () => {
         const winScroll =
           document.body.scrollTop || document.documentElement.scrollTop;
@@ -1632,7 +1781,7 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
 
-      // 5. Spotlight Effect (Mouse Tracking on Cards)
+      // Spotlight Effect
       document.querySelectorAll(".spotlight-card").forEach((card) => {
         card.addEventListener("mousemove", (e) => {
           const rect = card.getBoundingClientRect();
@@ -1643,11 +1792,10 @@
         });
       });
 
-      // 6. Custom Magnetic Cursor
+      // Magnetic Cursor
       const cursorDot = document.querySelector(".cursor-dot");
       const cursorOutline = document.querySelector(".cursor-outline");
 
-      // Deteksi perangkat non-touch
       if (window.matchMedia("(pointer: fine)").matches) {
         window.addEventListener("mousemove", (e) => {
           const posX = e.clientX;
@@ -1656,7 +1804,6 @@
           cursorDot.style.left = `${posX}px`;
           cursorDot.style.top = `${posY}px`;
 
-          // Slight delay for the outline (Smooth trailing effect)
           cursorOutline.animate(
             {
               left: `${posX}px`,
@@ -1666,7 +1813,6 @@
           );
         });
 
-        // Hover effect pada link dan button
         const interactables = document.querySelectorAll(
           "a, button, input, textarea"
         );
