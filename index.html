@@ -1671,6 +1671,80 @@
         <span class="font-bold text-white">Indra Setya Ari Irawan</span> &copy;
         2026
       </p>
+      <!-- ============================================== -->
+    <!-- FITUR CANGGIH: INDRA AI ASSISTANT (CHATBOT)    -->
+    <!-- ============================================== -->
+    <style>
+      /* CSS Animasi Typing untuk Chatbot & Sembunyikan Scrollbar Horizontal */
+      .typing-dot { animation: typing 1.4s infinite ease-in-out both; }
+      .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+      .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+      @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+
+    <div id="ai-chat-container" class="fixed bottom-8 left-4 md:left-8 z-[60] flex flex-col items-start transition-all duration-300 pointer-events-none">
+      
+      <!-- Window Chat -->
+      <div id="ai-chat-window" class="w-[90vw] md:w-96 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden flex-col origin-bottom-left transition-all duration-300 scale-0 opacity-0 mb-4 pointer-events-auto">
+        <!-- Header Chat -->
+        <div class="bg-gradient-to-r from-brand to-purple-600 p-4 flex justify-between items-center text-white shadow-md relative z-10">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center shadow-inner backdrop-blur-sm">
+              <i class="fa-solid fa-robot text-lg"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm tracking-wide">Indra AI Assistant</h4>
+              <p class="text-[10px] text-indigo-100 flex items-center gap-1.5 font-medium">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse border border-green-200"></span> NLP Engine Ready
+              </p>
+            </div>
+          </div>
+          <button id="close-chat" class="w-8 h-8 rounded-full hover:bg-white/20 transition-colors flex items-center justify-center">
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        </div>
+        
+        <!-- Area Pesan -->
+        <div id="chat-messages" class="p-4 h-72 overflow-y-auto flex flex-col gap-4 text-sm bg-slate-50 dark:bg-slate-800/50">
+          <!-- Pesan Sambutan Otomatis -->
+          <div class="flex gap-3 max-w-[85%]">
+            <div class="w-8 h-8 shrink-0 rounded-full bg-gradient-to-tr from-brand to-purple-500 flex items-center justify-center text-white text-xs"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div class="bg-white dark:bg-slate-800 p-3 rounded-2xl rounded-tl-sm border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 shadow-sm leading-relaxed">
+              Halo! Saya AI yang dilatih dengan data CV Indra Setya. Mau tahu keahlian Indra di bidang <strong>AI</strong>, <strong>Backend</strong>, atau <strong>Cloud</strong>? Ketik pertanyaanmu!
+            </div>
+          </div>
+        </div>
+
+        <!-- Input & Quick Prompts -->
+        <div class="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
+          <!-- Quick Suggestions -->
+          <div class="flex gap-2 overflow-x-auto pb-3 scrollbar-hide text-xs whitespace-nowrap" id="chat-suggestions">
+            <button class="suggestion-btn px-3 py-1.5 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-100 dark:border-indigo-800/50 text-brand dark:text-indigo-300 rounded-full hover:bg-brand hover:text-white dark:hover:bg-brand transition-all shadow-sm">Skill AI / NLP</button>
+            <button class="suggestion-btn px-3 py-1.5 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-100 dark:border-indigo-800/50 text-brand dark:text-indigo-300 rounded-full hover:bg-brand hover:text-white dark:hover:bg-brand transition-all shadow-sm">Cloud GCP</button>
+            <button class="suggestion-btn px-3 py-1.5 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-100 dark:border-indigo-800/50 text-brand dark:text-indigo-300 rounded-full hover:bg-brand hover:text-white dark:hover:bg-brand transition-all shadow-sm">Backend Tech</button>
+            <button class="suggestion-btn px-3 py-1.5 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-100 dark:border-indigo-800/50 text-brand dark:text-indigo-300 rounded-full hover:bg-brand hover:text-white dark:hover:bg-brand transition-all shadow-sm">Pengalaman</button>
+          </div>
+          
+          <form id="chat-form" class="flex gap-2 relative">
+            <input type="text" id="chat-input" placeholder="Tanya sesuatu..." class="w-full pl-4 pr-10 py-2.5 bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-brand/30 rounded-full focus:outline-none focus:ring-4 focus:ring-brand/10 dark:text-white text-sm transition-all" autocomplete="off">
+            <button type="submit" class="absolute right-1 top-1 w-8 h-8 rounded-full bg-brand text-white flex items-center justify-center hover:bg-indigo-700 transition-colors shadow-md">
+              <i class="fa-solid fa-paper-plane text-[10px] -ml-0.5"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <!-- Tombol Trigger Melayang -->
+      <button id="ai-chat-btn" class="w-14 h-14 bg-gradient-to-br from-brand to-purple-600 rounded-full shadow-[0_0_20px_rgba(79,70,229,0.4)] text-white text-xl flex items-center justify-center hover:scale-110 transition-transform duration-300 relative pointer-events-auto border-2 border-white/20">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <!-- Notifikasi Merah -->
+        <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-red-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
+        <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-red-500 rounded-full animate-ping"></span>
+      </button>
+    </div>
+    <!-- ============================================== -->
     </footer>
 
     <!-- Tombol Back to Top -->
@@ -1813,6 +1887,153 @@
           );
         });
       }
+      // ==========================================
+      // LOGIKA INDRA AI ASSISTANT (LOCAL NLP)
+      // ==========================================
+      const chatBtn = document.getElementById('ai-chat-btn');
+      const chatWindow = document.getElementById('ai-chat-window');
+      const closeChat = document.getElementById('close-chat');
+      const chatForm = document.getElementById('chat-form');
+      const chatInput = document.getElementById('chat-input');
+      const chatMessages = document.getElementById('chat-messages');
+      const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+      
+      let isChatOpen = false;
+
+      // Toggle Chat Window
+      function toggleChat() {
+        isChatOpen = !isChatOpen;
+        if (isChatOpen) {
+          chatWindow.classList.remove('scale-0', 'opacity-0');
+          chatWindow.classList.add('scale-100', 'opacity-100');
+          // Sembunyikan notif merah saat dibuka
+          chatBtn.querySelectorAll('span').forEach(el => el.style.display = 'none');
+          setTimeout(() => chatInput.focus(), 300);
+        } else {
+          chatWindow.classList.remove('scale-100', 'opacity-100');
+          chatWindow.classList.add('scale-0', 'opacity-0');
+        }
+      }
+
+      chatBtn.addEventListener('click', toggleChat);
+      closeChat.addEventListener('click', toggleChat);
+
+      // Fungsi scroll ke paling bawah
+      function scrollToBottom() {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      // Menambahkan Bubble Pesan
+      function appendMessage(text, isUser = false) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `flex gap-3 max-w-[85%] ${isUser ? 'ml-auto flex-row-reverse' : ''}`;
+        
+        const avatarObj = isUser 
+          ? `<div class="w-8 h-8 shrink-0 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400 text-xs"><i class="fa-solid fa-user"></i></div>`
+          : `<div class="w-8 h-8 shrink-0 rounded-full bg-gradient-to-tr from-brand to-purple-500 flex items-center justify-center text-white text-xs shadow-sm"><i class="fa-solid fa-wand-magic-sparkles"></i></div>`;
+          
+        const bubbleColor = isUser 
+          ? `bg-brand text-white rounded-2xl rounded-tr-sm shadow-md`
+          : `bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 shadow-sm rounded-2xl rounded-tl-sm`;
+
+        msgDiv.innerHTML = `
+          ${avatarObj}
+          <div class="p-3 ${bubbleColor} text-sm leading-relaxed">
+            ${text}
+          </div>
+        `;
+        
+        chatMessages.appendChild(msgDiv);
+        scrollToBottom();
+      }
+
+      // Animasi Mengetik
+      function showTyping() {
+        const typingDiv = document.createElement('div');
+        typingDiv.id = "typing-indicator";
+        typingDiv.className = "flex gap-3 max-w-[85%]";
+        typingDiv.innerHTML = `
+          <div class="w-8 h-8 shrink-0 rounded-full bg-gradient-to-tr from-brand to-purple-500 flex items-center justify-center text-white text-xs"><i class="fa-solid fa-robot"></i></div>
+          <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-3 rounded-2xl rounded-tl-sm flex items-center gap-1 w-16">
+            <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+            <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+            <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+          </div>
+        `;
+        chatMessages.appendChild(typingDiv);
+        scrollToBottom();
+      }
+
+      function removeTyping() {
+        const typingIndicator = document.getElementById('typing-indicator');
+        if (typingIndicator) typingIndicator.remove();
+      }
+
+      // LOCAL NLP ENGINE (Database Pengetahuan Indra)
+      function getAIResponse(input) {
+        const text = input.toLowerCase();
+        
+        // Aturan Regex Canggih untuk mendeteksi konteks
+        if (/(ai|nlp|kecerdasan buatan|machine learning|indobert|fasttext)/i.test(text)) {
+          return "Indra punya pengalaman kuat di <strong>AI & NLP</strong>! Dia membuat sistem rekomendasi video YouTube menggunakan <em>IndoBERT</em> untuk analisis sentimen dan <em>FastText</em> untuk kemiripan semantik. Keren kan? 🤖";
+        } 
+        else if (/(cloud|gcp|google cloud|deploy|server)/i.test(text)) {
+          return "Indra adalah lulusan <strong class='text-brand'>Bangkit Academy (Cloud Computing)</strong> dan punya lisensi resmi <strong>Google Cloud Engineer</strong>. Dia ahli melakukan deployment dan menjaga skalabilitas server menggunakan GCP. ☁️";
+        } 
+        else if (/(backend|api|node|laravel|php|database|mysql|mongodb)/i.test(text)) {
+          return "Untuk Backend, Indra adalah ahlinya! 🛠️ Tech stack utamanya: <strong>Node.js, Python (Flask), Laravel (PHP), dan C++</strong>. Dia terbiasa merancang RESTful API dan mengoptimasi database MySQL & MongoDB.";
+        }
+        else if (/(frontend|mobile|android|kotlin|next.js|javascript|ui|ux)/i.test(text)) {
+          return "Meski fokus di Backend/Cloud, Indra juga handal membuat Frontend modern dengan <strong>Next.js & Tailwind CSS</strong>. Dia juga bisa bikin aplikasi Android Native menggunakan <strong>Kotlin & Firebase</strong> (Proyek: LongoMate). 📱";
+        }
+        else if (/(pengalaman|kerja|intern|pt murgung|magang)/i.test(text)) {
+          return "Indra bekerja sebagai <strong>Full Stack Developer di PT Murgung</strong> (membuat ERP, payroll & sistem GPS absensi) dan lulusan program elit <strong>Bangkit Academy 2024</strong> yang diprakarsai Google & GoTo. 💼";
+        }
+        else if (/(kontak|hubungi|email|whatsapp|wa|hire|rekrut)/i.test(text)) {
+          return "Wah, mau ngajak kolaborasi ya? Langsung saja hubungi Indra lewat email di <strong>indrasetya379@gmail.com</strong> atau WhatsApp di <strong>+62 881-7671-468</strong>. Dia akan balas dengan cepat! 🚀";
+        }
+        else if (/(halo|hai|pagi|siang|sore|malam|hei)/i.test(text)) {
+          return "Halo! Ada yang bisa saya bantu jelaskan mengenai kualifikasi, skill, atau pengalaman Indra? Silakan tanya saja! ✨";
+        }
+        else {
+          return "Hmm, saya belum dilatih untuk menjawab pertanyaan itu. Tapi Anda bisa bertanya soal <strong>Skill AI</strong>, <strong>Sistem Backend</strong>, <strong>Pengalaman Cloud</strong>, atau klik tombol di bawah untuk menghubungi Indra langsung! 👇";
+        }
+      }
+
+      // Handle Input Submit
+      function handleSend(text) {
+        if (!text.trim()) return;
+        
+        // 1. Tampilkan pesan user
+        appendMessage(text, true);
+        chatInput.value = '';
+        
+        // 2. Munculkan efek "Typing..."
+        setTimeout(() => {
+          showTyping();
+          
+          // 3. Hapus "Typing..." dan tampilkan balasan AI setelah 1-2 detik (Simulasi mikir)
+          setTimeout(() => {
+            removeTyping();
+            const response = getAIResponse(text);
+            appendMessage(response, false);
+          }, 1200 + Math.random() * 800); // Durasi delay acak biar terasa natural
+
+        }, 300);
+      }
+
+      // Event Submit Form
+      chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleSend(chatInput.value);
+      });
+
+      // Event Tombol Sugesti Cepat
+      suggestionBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          handleSend(btn.innerText);
+        });
+      });
     </script>
   </body>
 </html>
