@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence, useSpring } from 'framer-motion';
 import { ArrowUpRight, ExternalLink, Sparkles } from 'lucide-react';
 import { PROJECTS, Project } from '../data/portfolioData';
 import { GenerativeThumbnail } from './GenerativeThumbnail';
@@ -11,180 +11,159 @@ interface ProjectsProps {
 }
 
 export const ProjectsSection: React.FC<ProjectsProps> = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
   const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  const categories = [
-    { id: 'all', label: 'Semua' },
-    { id: 'Backend', label: 'Backend' },
-    { id: 'AI', label: 'AI & ML' },
-    { id: 'Mobile', label: 'Mobile' },
-    { id: 'Full Stack', label: 'Full Stack' },
-  ];
+  // Smooth floating image position following cursor globally
+  const springX = useSpring(0, { stiffness: 220, damping: 22 });
+  const springY = useSpring(0, { stiffness: 220, damping: 22 });
 
-  const filteredProjects = selectedCategory === 'all'
-    ? PROJECTS
-    : PROJECTS.filter((p) => {
-        if (selectedCategory === 'Backend') {
-          return p.category === 'Backend' || p.category === 'Software';
-        }
-        return p.category === selectedCategory;
-      });
+  useEffect(() => {
+    const onWindowMove = (e: MouseEvent) => {
+      springX.set(e.clientX + 30);
+      springY.set(e.clientY - 80);
+    };
+    window.addEventListener('mousemove', onWindowMove);
+    return () => window.removeEventListener('mousemove', onWindowMove);
+  }, [springX, springY]);
 
   return (
-    <section id="proyek" className="py-24 sm:py-32 border-b border-black/[0.06] dark:border-white/[0.08]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        {/* Section Header with Category Filter */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[#5B6CFF]">
-              <span>03</span>
-              <span className="text-zinc-400 dark:text-zinc-600">/</span>
-              <span>Karya Pilihan</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white">
-              Proyek &amp; Rekayasa Terpilih
-            </h2>
+    <section id="proyek" className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-[1480px] mx-auto">
+      {/* Matthew Container Card */}
+      <div
+        className="relative rounded-[28px] sm:rounded-[36px] lg:rounded-[44px] bg-white dark:bg-[#11141C] border border-black/[0.08] dark:border-white/[0.08] shadow-2xl p-6 sm:p-12 lg:p-16 space-y-16 overflow-hidden"
+      >
+        {/* Top Header Row with Rotating Circular Badge (Matthew Signature) */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 border-b border-black/[0.08] dark:border-white/[0.08] pb-10">
+          {/* Statement Bio */}
+          <div className="max-w-xl space-y-3">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#5B6CFF] font-semibold block">
+              PORTFOLIO // KARYA PILIHAN
+            </span>
+            <p className="font-sans text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white leading-snug">
+              Membangun arsitektur backend andal, komputasi awan scalable, dan kecerdasan terapan yang melebihi standar industri.
+            </p>
           </div>
 
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/[0.08] rounded-lg self-start md:self-auto">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3.5 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all ${
-                  selectedCategory === cat.id
-                    ? 'bg-white dark:bg-[#181C26] text-zinc-900 dark:text-white shadow-sm border border-black/[0.05] dark:border-white/[0.08]'
-                    : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
-                }`}
+          {/* Matthew Signature Rotating Circular Badge */}
+          <div className="self-end md:self-auto shrink-0">
+            <a
+              href="#kontak"
+              className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full border border-black/15 dark:border-white/15 flex items-center justify-center group hover:scale-110 hover:border-[#5B6CFF] transition-all duration-300 shadow-sm"
+              aria-label="Diskusikan Proyek"
+            >
+              {/* Rotating Circular Text SVG */}
+              <div className="absolute inset-0 animate-spin-slow pointer-events-none">
+                <svg viewBox="0 0 100 100" className="w-full h-full">
+                  <path
+                    id="circlePath"
+                    d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+                    fill="none"
+                  />
+                  <text className="font-mono text-[9.5px] uppercase tracking-[0.24em] fill-zinc-600 dark:fill-zinc-300 font-semibold">
+                    <textPath href="#circlePath" startOffset="0%">
+                      &bull; DISCUSS PROJECT &bull; GET IN TOUCH &bull;
+                    </textPath>
+                  </text>
+                </svg>
+              </div>
+
+              {/* Center Icon */}
+              <div className="w-10 h-10 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 flex items-center justify-center group-hover:bg-[#5B6CFF] group-hover:text-white transition-colors">
+                <ArrowUpRight size={18} />
+              </div>
+            </a>
+          </div>
+        </div>
+
+        {/* Section Title */}
+        <div className="flex items-center justify-between">
+          <h3 className="font-mono text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-semibold">
+            SELECTED WORKS ({PROJECTS.length.toString().padStart(2, '0')})
+          </h3>
+          <span className="font-mono text-xs text-zinc-400 dark:text-zinc-500 hidden sm:inline">
+            Arahkan kursor untuk pratinjau &bull; Klik untuk studi kasus
+          </span>
+        </div>
+
+        {/* Matthew Project Rows with Dashed Lines */}
+        <div className="relative space-y-0">
+          {PROJECTS.map((project: Project, index: number) => {
+            const isHovered = hoveredProject?.id === project.id;
+
+            return (
+              <div
+                key={project.id}
+                onMouseEnter={() => setHoveredProject(project)}
+                onMouseLeave={() => setHoveredProject(null)}
+                onClick={() => setActiveModalProject(project)}
+                className="group relative border-t border-dashed border-black/15 dark:border-white/15 py-8 sm:py-10 transition-colors cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4"
               >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-        </div>
+                {/* Left: Project Number & Big Condensed Title */}
+                <div className="flex items-center gap-4 sm:gap-6">
+                  <span className="font-mono text-xs sm:text-sm text-zinc-400 dark:text-zinc-500 font-medium">
+                    {(index + 1).toString().padStart(2, '0')}.
+                  </span>
 
-        {/* Clean Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project: Project) => {
-              const isLarge = project.featured;
+                  <h4 className="font-display text-3xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-zinc-900 dark:text-white group-hover:text-[#5B6CFF] group-hover:translate-x-3 transition-all duration-300">
+                    {project.title}
+                  </h4>
+                </div>
 
-              return (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.3 }}
-                  className={`group relative rounded-2xl bg-white dark:bg-[#12151C] border border-black/[0.08] dark:border-white/[0.08] shadow-sm hover:border-[#5B6CFF]/40 dark:hover:border-[#5B6CFF]/40 transition-all duration-300 flex flex-col overflow-hidden ${
-                    isLarge ? 'lg:col-span-6' : 'lg:col-span-6'
-                  }`}
-                >
-                  {/* Thumbnail Container */}
-                  <div
-                    onClick={() => setActiveModalProject(project)}
-                    className="relative aspect-[16/9] w-full overflow-hidden bg-zinc-100 dark:bg-[#0D1017] cursor-pointer"
-                  >
-                    {project.image ? (
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 filter contrast-[1.02]"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <GenerativeThumbnail type={project.id} />
-                    )}
-
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity" />
-
-                    {/* Category pill on top of image */}
-                    <div className="absolute top-4 left-4 z-10">
-                      <span className="px-2.5 py-1 rounded-md bg-black/60 dark:bg-black/70 backdrop-blur-md text-[11px] font-mono text-white border border-white/10">
-                        {project.category}
-                      </span>
-                    </div>
-
-                    {/* Role badge top right */}
-                    <div className="absolute top-4 right-4 z-10">
-                      <span className="px-2.5 py-1 rounded-md bg-black/60 dark:bg-black/70 backdrop-blur-md text-[11px] font-mono text-zinc-300 border border-white/10">
-                        {project.role}
-                      </span>
-                    </div>
+                {/* Right: Category, Tech & Arrow */}
+                <div className="flex items-center justify-between md:justify-end gap-6 pl-8 md:pl-0">
+                  <div className="text-right">
+                    <span className="font-sans text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-300 block">
+                      {project.role}
+                    </span>
+                    <span className="font-mono text-[11px] text-zinc-400 dark:text-zinc-500">
+                      {project.category} &bull; {project.tech[0]}, {project.tech[1]}
+                    </span>
                   </div>
 
-                  {/* Card Content */}
-                  <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-5">
-                    <div className="space-y-3">
-                      {/* Project Title & Subtitle */}
-                      <div>
-                        <h3
-                          onClick={() => setActiveModalProject(project)}
-                          className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white group-hover:text-[#5B6CFF] transition-colors cursor-pointer"
-                        >
-                          {project.title}
-                        </h3>
-                        <p className="text-xs font-mono text-zinc-500 dark:text-zinc-400 mt-1">
-                          {project.subtitle}
-                        </p>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-3 leading-relaxed">
-                        {project.desc}
-                      </p>
-                    </div>
-
-                    {/* Footer: Tech tags + Links */}
-                    <div className="space-y-4 pt-4 border-t border-black/[0.06] dark:border-white/[0.08]">
-                      {/* Monospace Tech Tags */}
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.tech.slice(0, 4).map((t, idx) => (
-                          <span
-                            key={idx}
-                            className="px-2.5 py-1 rounded bg-black/[0.02] dark:bg-white/[0.04] text-[11px] font-mono text-zinc-600 dark:text-zinc-400 border border-black/[0.05] dark:border-white/[0.06]"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                        {project.tech.length > 4 && (
-                          <span className="px-2 py-1 rounded text-[11px] font-mono text-zinc-400">
-                            +{project.tech.length - 4}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Action Links */}
-                      <div className="flex items-center justify-between pt-1">
-                        <button
-                          onClick={() => setActiveModalProject(project)}
-                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#5B6CFF] hover:underline"
-                        >
-                          <span>Studi Kasus</span>
-                          <ArrowUpRight size={14} />
-                        </button>
-
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white bg-black/[0.03] dark:bg-white/[0.05] hover:bg-black/[0.06] dark:hover:bg-white/[0.08] transition-colors"
-                        >
-                          <GithubIcon size={13} />
-                          <span>Repositori</span>
-                        </a>
-                      </div>
-                    </div>
+                  <div className="w-8 h-8 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-white group-hover:bg-[#5B6CFF] group-hover:border-[#5B6CFF] transition-all">
+                    <ArrowUpRight size={16} />
                   </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+                </div>
+              </div>
+            );
+          })}
+
+          <div className="border-b border-dashed border-black/15 dark:border-white/15" />
         </div>
+
+        {/* Matthew Signature Interactive Floating Image Preview (Follows Cursor) */}
+        <AnimatePresence>
+          {hoveredProject && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, rotate: -3 }}
+              animate={{ opacity: 1, scale: 1, rotate: 2 }}
+              exit={{ opacity: 0, scale: 0.8, rotate: -3 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              style={{
+                x: springX,
+                y: springY,
+              }}
+              className="pointer-events-none fixed top-0 left-0 z-30 hidden lg:block w-[360px] h-[220px] rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20 bg-zinc-900"
+            >
+              {hoveredProject.image ? (
+                <img
+                  src={hoveredProject.image}
+                  alt={hoveredProject.title}
+                  className="w-full h-full object-cover object-top"
+                />
+              ) : (
+                <GenerativeThumbnail type={hoveredProject.id} />
+              )}
+              {/* Subtle badge on preview */}
+              <div className="absolute bottom-3 left-3 right-3 p-2 rounded-lg bg-black/70 backdrop-blur-md text-white font-mono text-[10px] flex items-center justify-between border border-white/10">
+                <span>{hoveredProject.subtitle}</span>
+                <span className="text-[#5B6CFF] font-bold">STUDI KASUS &bull; KLIK</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Case Study Modal */}

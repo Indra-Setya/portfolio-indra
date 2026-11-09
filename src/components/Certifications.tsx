@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Award, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, Award, ShieldCheck, ArrowUpRight } from 'lucide-react';
 import { CERTIFICATIONS, Certification } from '../data/portfolioData';
 
 interface CertificationsProps {
@@ -11,10 +11,10 @@ export const CertificationsSection: React.FC<CertificationsProps> = () => {
   const [selectedIssuer, setSelectedIssuer] = useState<string>('all');
 
   const groups = [
-    { id: 'all', label: 'Semua (9)' },
-    { id: 'Bangkit', label: 'Bangkit Academy' },
-    { id: 'Google Cloud', label: 'Google Cloud' },
-    { id: 'Dicoding', label: 'Dicoding' },
+    { id: 'all', label: 'SEMUA (09)' },
+    { id: 'Bangkit', label: 'BANGKIT ACADEMY' },
+    { id: 'Google Cloud', label: 'GOOGLE CLOUD' },
+    { id: 'Dicoding', label: 'DICODING' },
   ];
 
   const filteredCerts = selectedIssuer === 'all'
@@ -22,31 +22,30 @@ export const CertificationsSection: React.FC<CertificationsProps> = () => {
     : CERTIFICATIONS.filter((c) => c.category === selectedIssuer);
 
   return (
-    <section id="sertifikasi" className="py-24 sm:py-32 border-b border-black/[0.06] dark:border-white/[0.08]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        {/* Section Header with Filter Controls */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[#5B6CFF]">
-              <span>04</span>
-              <span className="text-zinc-400 dark:text-zinc-600">/</span>
-              <span>Sertifikasi</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white">
+    <section id="sertifikasi" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-[1480px] mx-auto">
+      {/* Matthew Card Container */}
+      <div className="rounded-[28px] sm:rounded-[36px] lg:rounded-[44px] bg-white dark:bg-[#11141C] border border-black/[0.08] dark:border-white/[0.08] shadow-2xl p-6 sm:p-12 lg:p-16 space-y-12 overflow-hidden">
+        {/* Header Row */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-black/[0.08] dark:border-white/[0.08] pb-8">
+          <div className="space-y-2">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#5B6CFF] font-semibold block">
+              /03 CREDENTIALS
+            </span>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-zinc-900 dark:text-white leading-tight">
               Sertifikasi &amp; Lisensi Resmi
             </h2>
           </div>
 
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/[0.08] rounded-lg self-start md:self-auto">
+          {/* Filter Pills */}
+          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-[#EEF0F4] dark:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] rounded-full self-start md:self-auto font-mono text-xs">
             {groups.map((group) => (
               <button
                 key={group.id}
                 onClick={() => setSelectedIssuer(group.id)}
-                className={`px-3.5 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all ${
+                className={`px-4 py-2 rounded-full uppercase tracking-wider transition-all ${
                   selectedIssuer === group.id
-                    ? 'bg-white dark:bg-[#181C26] text-zinc-900 dark:text-white shadow-sm border border-black/[0.05] dark:border-white/[0.08]'
-                    : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                    ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold shadow-sm'
+                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
                 {group.label}
@@ -55,7 +54,7 @@ export const CertificationsSection: React.FC<CertificationsProps> = () => {
           </div>
         </div>
 
-        {/* 3-Column Clean Card Grid */}
+        {/* 3-Column Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           <AnimatePresence mode="popLayout">
             {filteredCerts.map((cert: Certification) => (
@@ -66,37 +65,37 @@ export const CertificationsSection: React.FC<CertificationsProps> = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.3 }}
-                className="group rounded-2xl p-6 bg-white dark:bg-[#12151C] border border-black/[0.08] dark:border-white/[0.08] shadow-sm hover:border-[#5B6CFF]/40 dark:hover:border-[#5B6CFF]/40 transition-all duration-200 flex flex-col justify-between space-y-5"
+                className="group rounded-3xl p-6 sm:p-7 bg-[#F7F8FA] dark:bg-[#0E1118] border border-black/[0.06] dark:border-white/[0.08] shadow-sm hover:border-[#5B6CFF]/50 transition-all duration-300 flex flex-col justify-between space-y-6"
               >
-                <div className="space-y-3">
-                  {/* Top Bar: Category badge & Verified indicator */}
+                <div className="space-y-4">
+                  {/* Category & Verified seal */}
                   <div className="flex items-center justify-between">
-                    <span className="px-2.5 py-1 rounded text-[11px] font-mono font-medium bg-black/[0.03] dark:bg-white/[0.05] text-zinc-600 dark:text-zinc-300 border border-black/[0.06] dark:border-white/[0.08]">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-white dark:bg-white/[0.06] text-zinc-700 dark:text-zinc-300 border border-black/[0.06] dark:border-white/[0.08] font-semibold">
                       {cert.category}
                     </span>
 
                     {cert.verified && (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-600 dark:text-emerald-400">
+                      <span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-500">
                         <CheckCircle2 size={13} />
-                        <span>Terverifikasi</span>
+                        <span>Resmi</span>
                       </span>
                     )}
                   </div>
 
                   {/* Title & Issuer */}
                   <div>
-                    <h3 className="text-lg font-bold tracking-tight text-zinc-900 dark:text-white group-hover:text-[#5B6CFF] transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-900 dark:text-white group-hover:text-[#5B6CFF] transition-colors leading-snug">
                       {cert.title}
                     </h3>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1.5 font-sans">
                       {cert.issuer}
                     </p>
                   </div>
                 </div>
 
-                {/* Bottom Details: Date & Competencies */}
-                <div className="space-y-3 pt-3 border-t border-black/[0.06] dark:border-white/[0.08]">
-                  <div className="flex items-center justify-between text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                {/* Bottom Details */}
+                <div className="space-y-3 pt-4 border-t border-black/[0.06] dark:border-white/[0.08]">
+                  <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
                     <span>Masa Berlaku</span>
                     <span className="font-semibold text-zinc-700 dark:text-zinc-300">
                       {cert.period}
@@ -108,7 +107,7 @@ export const CertificationsSection: React.FC<CertificationsProps> = () => {
                     {cert.skills.map((skill, sIdx) => (
                       <span
                         key={sIdx}
-                        className="px-2 py-0.5 rounded bg-black/[0.02] dark:bg-white/[0.03] text-[10px] font-mono text-zinc-500 dark:text-zinc-400 border border-black/[0.04] dark:border-white/[0.06]"
+                        className="px-2.5 py-0.5 rounded-full bg-white dark:bg-white/[0.04] text-[10px] font-mono text-zinc-500 dark:text-zinc-400 border border-black/[0.04] dark:border-white/[0.06]"
                       >
                         {skill}
                       </span>

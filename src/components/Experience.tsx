@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Briefcase, GraduationCap, ChevronRight, Check } from 'lucide-react';
+import { Briefcase, GraduationCap, ChevronRight, Check, ArrowUpRight } from 'lucide-react';
 import { EXPERIENCES, Experience } from '../data/portfolioData';
 
 interface ExperienceProps {
@@ -9,55 +9,55 @@ interface ExperienceProps {
 
 export const ExperienceSection: React.FC<ExperienceProps> = () => {
   const [filter, setFilter] = useState<'all' | 'work' | 'education'>('all');
+  const [expandedId, setExpandedId] = useState<string | null>('bangkit');
 
   const filteredExperiences = filter === 'all'
     ? EXPERIENCES
     : EXPERIENCES.filter((item) => item.type === filter);
 
   return (
-    <section id="pengalaman" className="py-24 sm:py-32 border-b border-black/[0.06] dark:border-white/[0.08]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        {/* Section Header with Clean Filter Tabs */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[#5B6CFF]">
-              <span>02</span>
-              <span className="text-zinc-400 dark:text-zinc-600">/</span>
-              <span>Jejak Langkah</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white">
-              Pengalaman Kerja &amp; Pendidikan
+    <section id="pengalaman" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-[1480px] mx-auto">
+      {/* Matthew Card Container */}
+      <div className="rounded-[28px] sm:rounded-[36px] lg:rounded-[44px] bg-[#EEF0F4] dark:bg-[#11141C] border border-black/[0.08] dark:border-white/[0.08] shadow-2xl p-6 sm:p-12 lg:p-16 space-y-12 overflow-hidden">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-black/[0.08] dark:border-white/[0.08] pb-8">
+          <div className="space-y-2">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#5B6CFF] font-semibold block">
+              /02 TIMELINE
+            </span>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tight text-zinc-900 dark:text-white leading-tight">
+              Jejak Langkah &amp; Karier
             </h2>
           </div>
 
-          {/* Clean Segmented Filter Controls */}
-          <div className="flex items-center gap-1 p-1 bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/[0.08] rounded-lg self-start md:self-auto">
+          {/* Segmented Filter */}
+          <div className="flex items-center gap-1 p-1 bg-white dark:bg-black/40 border border-black/[0.08] dark:border-white/[0.08] rounded-full self-start md:self-auto font-mono text-xs">
             <button
               onClick={() => setFilter('all')}
-              className={`px-4 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all ${
+              className={`px-4 py-2 rounded-full uppercase tracking-wider transition-all ${
                 filter === 'all'
-                  ? 'bg-white dark:bg-[#181C26] text-zinc-900 dark:text-white shadow-sm border border-black/[0.05] dark:border-white/[0.08]'
-                  : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                  ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold shadow-sm'
+                  : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
               }`}
             >
               Semua
             </button>
             <button
               onClick={() => setFilter('work')}
-              className={`px-4 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all ${
+              className={`px-4 py-2 rounded-full uppercase tracking-wider transition-all ${
                 filter === 'work'
-                  ? 'bg-white dark:bg-[#181C26] text-zinc-900 dark:text-white shadow-sm border border-black/[0.05] dark:border-white/[0.08]'
-                  : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                  ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold shadow-sm'
+                  : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
               }`}
             >
-              Pengalaman Kerja
+              Pengalaman
             </button>
             <button
               onClick={() => setFilter('education')}
-              className={`px-4 py-1.5 rounded-md text-xs sm:text-sm font-medium transition-all ${
+              className={`px-4 py-2 rounded-full uppercase tracking-wider transition-all ${
                 filter === 'education'
-                  ? 'bg-white dark:bg-[#181C26] text-zinc-900 dark:text-white shadow-sm border border-black/[0.05] dark:border-white/[0.08]'
-                  : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                  ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold shadow-sm'
+                  : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
               }`}
             >
               Pendidikan
@@ -65,11 +65,12 @@ export const ExperienceSection: React.FC<ExperienceProps> = () => {
           </div>
         </div>
 
-        {/* Clean Vertical Timeline (Linear aesthetic) */}
-        <div className="relative pl-4 sm:pl-8 border-l border-black/[0.08] dark:border-white/[0.08] space-y-12 sm:space-y-16">
+        {/* Interactive Milestone Accordion List */}
+        <div className="space-y-4">
           <AnimatePresence mode="popLayout">
             {filteredExperiences.map((exp: Experience, index: number) => {
               const isWork = exp.type === 'work';
+              const isExpanded = expandedId === exp.id;
 
               return (
                 <motion.div
@@ -78,96 +79,100 @@ export const ExperienceSection: React.FC<ExperienceProps> = () => {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.35, delay: index * 0.05 }}
-                  className="relative group"
+                  transition={{ duration: 0.3 }}
+                  className="rounded-2xl sm:rounded-3xl bg-white dark:bg-[#0E1118] border border-black/[0.06] dark:border-white/[0.08] p-6 sm:p-8 shadow-sm hover:border-[#5B6CFF]/40 transition-all cursor-pointer"
+                  onClick={() => setExpandedId(isExpanded ? null : exp.id)}
                 >
-                  {/* Timeline Node Indicator on Left Line */}
-                  <div className="absolute -left-[21px] sm:-left-[37px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-[#0B0D12] border-2 border-[#5B6CFF] flex items-center justify-center">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#5B6CFF]" />
-                  </div>
-
-                  {/* Card Container */}
-                  <div className="rounded-2xl p-6 sm:p-8 bg-white dark:bg-[#12151C] border border-black/[0.08] dark:border-white/[0.08] shadow-sm hover:border-black/[0.15] dark:hover:border-white/[0.15] transition-all duration-200 space-y-5">
-                    {/* Top Row: Date & Type Badge */}
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <div className="flex items-center gap-2">
-                        <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-medium uppercase tracking-wider bg-black/[0.03] dark:bg-white/[0.05] text-zinc-600 dark:text-zinc-300 border border-black/[0.06] dark:border-white/[0.08] flex items-center gap-1.5">
-                          {isWork ? (
-                            <Briefcase size={12} className="text-[#5B6CFF]" />
-                          ) : (
-                            <GraduationCap size={12} className="text-[#5B6CFF]" />
-                          )}
-                          <span>{isWork ? 'Pengalaman Kerja' : 'Pendidikan'}</span>
-                        </span>
-                      </div>
-
-                      <span className="font-mono text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
-                        {exp.period}
-                      </span>
-                    </div>
-
-                    {/* Role Title & Organization */}
-                    <div className="space-y-1">
-                      <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
-                        {exp.role}
-                      </h3>
-                      <div className="flex items-center gap-3 text-sm text-zinc-600 dark:text-zinc-400">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="flex items-start sm:items-center gap-4">
+                      {/* Logo or Icon */}
+                      <div className="w-12 h-12 rounded-2xl bg-zinc-100 dark:bg-white/[0.06] p-2 flex items-center justify-center shrink-0 border border-black/[0.06] dark:border-white/[0.08]">
                         {exp.logo ? (
                           <img
                             src={exp.logo}
                             alt={exp.company}
-                            className="w-5 h-5 rounded object-contain"
+                            className="w-full h-full object-contain"
                           />
                         ) : (
-                          <span className="w-5 h-5 rounded bg-black/[0.06] dark:bg-white/[0.08] text-[10px] font-bold font-mono flex items-center justify-center text-zinc-700 dark:text-zinc-300">
+                          <span className="font-mono text-xs font-bold text-zinc-700 dark:text-zinc-300">
                             {exp.logoFallback}
                           </span>
                         )}
-                        <span className="font-semibold text-zinc-800 dark:text-zinc-200">
+                      </div>
+
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] text-zinc-600 dark:text-zinc-400">
+                            {isWork ? 'Karier' : 'Pendidikan'}
+                          </span>
+                          <span className="font-mono text-xs text-zinc-400">
+                            {exp.period}
+                          </span>
+                        </div>
+                        <h3 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-900 dark:text-white">
+                          {exp.role}
+                        </h3>
+                        <p className="text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400">
                           {exp.company}
-                        </span>
+                        </p>
                       </div>
                     </div>
 
-                    {/* Description Paragraph */}
-                    <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                      {exp.desc}
-                    </p>
-
-                    {/* Highlights / Key Achievements */}
-                    {exp.highlights && exp.highlights.length > 0 && (
-                      <div className="pt-2 space-y-2 border-t border-black/[0.06] dark:border-white/[0.08]">
-                        <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-                          Capaian &amp; Tanggung Jawab Kunci:
-                        </span>
-                        <ul className="space-y-2">
-                          {exp.highlights.map((highlight, hIdx) => (
-                            <li
-                              key={hIdx}
-                              className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300"
-                            >
-                              <Check size={14} className="text-[#5B6CFF] shrink-0 mt-0.5" />
-                              <span>{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
+                    <div className="self-end sm:self-auto flex items-center gap-2 font-mono text-xs text-zinc-400">
+                      <span>{isExpanded ? 'Tutup' : 'Detail'}</span>
+                      <div className={`w-8 h-8 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center transition-transform ${isExpanded ? 'rotate-90' : ''}`}>
+                        <ChevronRight size={15} />
                       </div>
-                    )}
-
-                    {/* Skills Monospace Tags */}
-                    {exp.skills && exp.skills.length > 0 && (
-                      <div className="pt-2 flex flex-wrap gap-1.5">
-                        {exp.skills.map((skill, sIdx) => (
-                          <span
-                            key={sIdx}
-                            className="px-2.5 py-1 rounded bg-black/[0.02] dark:bg-white/[0.04] text-[11px] font-mono text-zinc-600 dark:text-zinc-400 border border-black/[0.05] dark:border-white/[0.06]"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                    </div>
                   </div>
+
+                  {/* Expandable Content */}
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden pt-6 mt-6 border-t border-black/[0.06] dark:border-white/[0.08] space-y-4"
+                      >
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans">
+                          {exp.desc}
+                        </p>
+
+                        {/* Highlights */}
+                        {exp.highlights && exp.highlights.length > 0 && (
+                          <div className="space-y-2">
+                            <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                              Capaian Kunci:
+                            </span>
+                            <ul className="space-y-2">
+                              {exp.highlights.map((h, hIdx) => (
+                                <li key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300">
+                                  <Check size={14} className="text-[#5B6CFF] mt-0.5 shrink-0" />
+                                  <span>{h}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {/* Skills */}
+                        {exp.skills && exp.skills.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5 pt-2">
+                            {exp.skills.map((skill, sIdx) => (
+                              <span
+                                key={sIdx}
+                                className="px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.05] text-[11px] font-mono text-zinc-600 dark:text-zinc-400 border border-black/[0.04] dark:border-white/[0.06]"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               );
             })}

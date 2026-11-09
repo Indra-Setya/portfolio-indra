@@ -29,6 +29,8 @@ export default {
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
         heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+        display: ['"Bebas Neue"', 'sans-serif'],
+        syne: ['"Syne"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       borderRadius: {

@@ -3,9 +3,10 @@ import Lenis from 'lenis';
 import { CustomCursor } from './components/CustomCursor';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { MarqueeRibbon } from './components/MarqueeRibbon';
 import { About } from './components/About';
-import { ExperienceSection } from './components/Experience';
 import { ProjectsSection } from './components/Projects';
+import { ExperienceSection } from './components/Experience';
 import { CertificationsSection } from './components/Certifications';
 import { ContactSection } from './components/Contact';
 import { Footer } from './components/Footer';
@@ -14,7 +15,7 @@ export const App: React.FC = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Initialize Theme from localStorage or system preference
+  // Initialize Theme from localStorage or default to dark
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' | null;
     if (savedTheme) {
@@ -25,7 +26,6 @@ export const App: React.FC = () => {
         document.documentElement.classList.add('dark');
       }
     } else {
-      // Default to dark mode as requested
       setTheme('dark');
       document.documentElement.classList.add('dark');
     }
@@ -54,10 +54,10 @@ export const App: React.FC = () => {
     }
   };
 
-  // Lenis Smooth Scrolling
+  // Lenis Smooth Scrolling for Fluid High-End Motion
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       smoothWheel: true,
@@ -93,18 +93,19 @@ export const App: React.FC = () => {
         />
       </div>
 
-      {/* Subtle Custom Cursor */}
+      {/* Custom Cursor */}
       <CustomCursor />
 
-      {/* Main Page Layout */}
-      <div className="relative min-h-screen flex flex-col font-sans bg-[#FAFAF9] dark:bg-[#0B0D12] text-[#0F172A] dark:text-[#F1F5F9] transition-colors duration-200">
+      {/* Main Page Layout (Matthew Architecture) */}
+      <div className="relative min-h-screen flex flex-col font-sans bg-[#FAFAF9] dark:bg-[#08090D] text-[#0F172A] dark:text-[#F1F5F9] transition-colors duration-300">
         <Navbar currentTheme={theme} onToggleTheme={toggleTheme} />
 
-        <main className="flex-1">
+        <main className="flex-1 space-y-4 sm:space-y-8">
           <Hero />
+          <MarqueeRibbon />
           <About />
-          <ExperienceSection />
           <ProjectsSection />
+          <ExperienceSection />
           <CertificationsSection />
           <ContactSection />
         </main>

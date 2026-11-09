@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowDownRight, Download, Sparkles } from 'lucide-react';
-import { PERSONAL_INFO, TECH_STACK } from '../data/portfolioData';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowDown, ArrowUpRight, Download, Sparkles, MapPin, Terminal } from 'lucide-react';
+import { PERSONAL_INFO } from '../data/portfolioData';
 
 interface HeroProps {
   language?: 'id' | 'en';
@@ -10,11 +10,11 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
+  // Mouse parallax
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Subtle parallax calculation (-15 to 15 px)
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 28;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 28;
     setMousePos({ x, y });
   };
 
@@ -25,193 +25,194 @@ export const Hero: React.FC<HeroProps> = () => {
   return (
     <section
       id="beranda"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="relative min-h-[90vh] flex flex-col justify-between pt-28 sm:pt-36 pb-12 overflow-hidden bg-subtle-grid border-b border-black/[0.06] dark:border-white/[0.08]"
+      className="relative pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-[1480px] mx-auto overflow-hidden"
     >
-      {/* Soft Static Light Glow Background (Linear/Vercel style, no WebGL) */}
-      <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#5B6CFF]/[0.08] dark:bg-[#5B6CFF]/[0.12] rounded-full blur-[140px] pointer-events-none"
-        aria-hidden="true"
-      />
+      {/* Matthew Container Card with Rounded 3xl/4xl Border */}
+      <motion.div
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="relative rounded-[28px] sm:rounded-[36px] lg:rounded-[44px] bg-[#EEF0F4] dark:bg-[#11141C] border border-black/[0.08] dark:border-white/[0.08] shadow-2xl overflow-hidden min-h-[82vh] lg:min-h-[88vh] flex flex-col justify-between p-6 sm:p-10 lg:p-14 select-none"
+      >
+        {/* Matthew Delicate SVG Orbital Lines in Background */}
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none opacity-40 dark:opacity-20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <ellipse
+            cx="40%"
+            cy="45%"
+            rx="450"
+            ry="400"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+            className="text-zinc-400 dark:text-zinc-600"
+            strokeDasharray="4 6"
+          />
+          <circle
+            cx="25%"
+            cy="18%"
+            r="4"
+            className="fill-zinc-400 dark:fill-zinc-500 animate-pulse"
+          />
+          <ellipse
+            cx="65%"
+            cy="60%"
+            rx="520"
+            ry="460"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+            className="text-zinc-300 dark:text-zinc-700"
+          />
+          <circle
+            cx="78%"
+            cy="35%"
+            r="3.5"
+            className="fill-[#5B6CFF]"
+          />
+        </svg>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Heading, Bio, CTAs (7 Cols) */}
-          <div className="lg:col-span-7 space-y-8">
-            {/* Availability Status Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.1] text-xs font-mono"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-                {PERSONAL_INFO.status} &bull; Yogyakarta, ID
-              </span>
-            </motion.div>
+        {/* Ambient Glow */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#5B6CFF]/[0.08] dark:bg-[#5B6CFF]/[0.15] rounded-full blur-[140px] pointer-events-none"
+          aria-hidden="true"
+        />
 
-            {/* Main Headline with line-by-line reveal */}
-            <div className="space-y-2">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="text-4xl sm:text-6xl lg:text-[4.2rem] font-bold tracking-tight text-zinc-900 dark:text-white leading-[1.08]"
-              >
-                Membangun Solusi Digital dengan{' '}
-                <span className="text-[#5B6CFF]">Kode &amp; Kecerdasan</span>
-              </motion.h1>
+        {/* Top Info Bar within Hero Card (Matthew Style) */}
+        <div className="relative z-20 flex items-start justify-between gap-4">
+          {/* Left Title Label */}
+          <div className="space-y-1">
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 block">
+              Software Engineer &bull; Indonesia
+            </span>
+            <h2 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white leading-tight">
+              Backend, AI &amp; Cloud Architecture
+            </h2>
+          </div>
+
+          {/* Right Status Badge */}
+          <div className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md border border-black/[0.06] dark:border-white/[0.08] text-xs font-mono">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+              {PERSONAL_INFO.status} &bull; Yogyakarta
+            </span>
+          </div>
+        </div>
+
+        {/* CENTER COMPOSITION: Giant Condensed Text + Cutout Portrait Layering */}
+        <div className="relative flex-1 flex items-center justify-center my-4 sm:my-8 overflow-hidden min-h-[380px] sm:min-h-[460px] lg:min-h-[520px]">
+          {/* Matthew Giant Background Typography */}
+          <motion.div
+            style={{
+              transform: `translate3d(${-mousePos.x * 0.4}px, ${-mousePos.y * 0.4}px, 0)`,
+              transition: 'transform 0.2s cubic-bezier(0.2, 0, 0, 1)',
+            }}
+            className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
+          >
+            <h1 className="font-display text-[19vw] sm:text-[18vw] lg:text-[17vw] leading-none tracking-tight font-black uppercase text-zinc-900/[0.95] dark:text-white/[0.92] select-none whitespace-nowrap text-center">
+              INDRA SETYA
+            </h1>
+          </motion.div>
+
+          {/* Centered Cutout Portrait: Overlapping in Front of the Giant Typography */}
+          <motion.div
+            style={{
+              transform: `translate3d(${mousePos.x}px, ${mousePos.y * 0.7}px, 0)`,
+              transition: 'transform 0.2s cubic-bezier(0.2, 0, 0, 1)',
+            }}
+            className="relative z-10 w-[240px] sm:w-[320px] lg:w-[390px] aspect-[4/5] flex items-end justify-center filter drop-shadow-2xl"
+          >
+            <img
+              src="/IMG/Profile.png"
+              alt="Indra Setya Ari Irawan"
+              className="w-full h-full object-contain object-bottom filter contrast-[1.04] brightness-[1.02] hover:scale-105 transition-transform duration-500 pointer-events-auto"
+            />
+          </motion.div>
+
+          {/* Floating Monospace Badges (Matthew Floating Detail Micro-interactions) */}
+          <motion.div
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute left-2 sm:left-8 bottom-6 sm:bottom-12 z-20 hidden md:block"
+          >
+            <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-[#0E1118]/90 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.1] shadow-lg space-y-1">
+              <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                LULUSAN / KEAHLIAN
+              </div>
+              <div className="text-xs font-bold text-zinc-900 dark:text-white">
+                Informatika UAD &bull; IPK 3.59
+              </div>
             </div>
+          </motion.div>
 
-            {/* Subtitle / Bio Narrative */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed"
-            >
-              Halo, saya <span className="font-semibold text-zinc-900 dark:text-zinc-200">{PERSONAL_INFO.name}</span>. 
-              Software engineer yang berfokus pada arsitektur sistem Backend, infrastruktur Cloud (GCP), 
-              dan integrasi model Machine Learning / AI yang handal dan skalabel.
-            </motion.p>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute right-2 sm:right-8 top-8 sm:top-16 z-20 hidden md:block"
+          >
+            <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-[#0E1118]/90 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.1] shadow-lg space-y-1">
+              <div className="text-[10px] font-mono uppercase tracking-wider text-[#5B6CFF] font-semibold">
+                ALUMNI BANGKIT '24
+              </div>
+              <div className="text-xs font-bold text-zinc-900 dark:text-white">
+                Google Cloud Certified
+              </div>
+            </div>
+          </motion.div>
+        </div>
 
-            {/* Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-wrap items-center gap-4 pt-2"
-            >
+        {/* Bottom Hero Bar: Bio text, Action Buttons, and Matthew Scroll Down */}
+        <div className="relative z-20 flex flex-col md:flex-row items-center md:items-end justify-between gap-6 pt-4 border-t border-black/[0.06] dark:border-white/[0.08]">
+          {/* Bio statement & Action CTAs */}
+          <div className="space-y-4 max-w-xl text-center md:text-left">
+            <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans">
+              Membangun infrastruktur backend skalabel di <strong className="text-zinc-900 dark:text-zinc-200">Google Cloud Platform</strong>, 
+              sistem microservices performa tinggi, dan integrasi kecerdasan buatan NLP untuk solusi digital nyata.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
               <a
                 href="#proyek"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#5B6CFF] hover:bg-[#4A5AE8] text-white text-sm font-semibold transition-all duration-200 shadow-sm hover:shadow-indigo-500/20 hover:shadow-md"
+                className="px-6 py-2.5 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-mono text-xs font-bold uppercase tracking-wider hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all duration-200 shadow-sm active:scale-95 flex items-center gap-2"
               >
-                <span>Lihat Karya Saya</span>
-                <ArrowDownRight size={16} />
+                <span>Lihat Karya</span>
+                <ArrowUpRight size={14} />
               </a>
 
               <a
                 href={PERSONAL_INFO.resumePath}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white dark:bg-[#12151C] hover:bg-zinc-50 dark:hover:bg-[#181C26] text-zinc-800 dark:text-zinc-200 text-sm font-semibold border border-black/[0.08] dark:border-white/[0.1] transition-all duration-200 shadow-sm"
+                className="px-6 py-2.5 rounded-full bg-white dark:bg-black/40 text-zinc-900 dark:text-white border border-black/10 dark:border-white/10 font-mono text-xs font-bold uppercase tracking-wider hover:bg-black/[0.04] dark:hover:bg-white/[0.08] transition-all duration-200 shadow-sm active:scale-95 flex items-center gap-2"
               >
-                <Download size={16} className="text-zinc-500 dark:text-zinc-400" />
+                <Download size={14} className="text-zinc-500" />
                 <span>Unduh CV</span>
               </a>
-            </motion.div>
+            </div>
+          </div>
 
-            {/* Small Quick Credentials (Monospace) */}
+          {/* Matthew "Scroll down" with Bouncing Down Arrow */}
+          <div className="flex flex-col items-center md:items-end gap-2 text-zinc-600 dark:text-zinc-400 cursor-pointer group">
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
+              Scroll down
+            </span>
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono text-zinc-500 dark:text-zinc-400"
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-9 h-9 rounded-full border border-black/15 dark:border-white/15 flex items-center justify-center group-hover:border-[#5B6CFF] group-hover:text-[#5B6CFF] transition-colors"
             >
-              <div>
-                <span className="text-zinc-400 dark:text-zinc-600 mr-1.5">ALUMNUS</span>
-                <span className="text-zinc-800 dark:text-zinc-300 font-medium">Bangkit Google Cloud '24</span>
-              </div>
-              <span className="text-zinc-300 dark:text-zinc-700">&bull;</span>
-              <div>
-                <span className="text-zinc-400 dark:text-zinc-600 mr-1.5">LULUSAN</span>
-                <span className="text-zinc-800 dark:text-zinc-300 font-medium">Informatika UAD (IPK 3.59)</span>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right Column: Clean Portrait Photo with subtle mouse parallax (5 Cols) */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                transform: `translate3d(${mousePos.x}px, ${mousePos.y}px, 0)`,
-                transition: 'transform 0.2s cubic-bezier(0.2, 0, 0, 1)',
-              }}
-              className="relative w-full max-w-sm"
-            >
-              {/* Outer clean frame */}
-              <div className="relative rounded-2xl p-2 bg-gradient-to-b from-black/[0.06] to-black/[0.02] dark:from-white/[0.08] dark:to-white/[0.02] border border-black/[0.08] dark:border-white/[0.1] shadow-2xl backdrop-blur-sm">
-                <div className="relative rounded-xl overflow-hidden aspect-[4/5] bg-zinc-100 dark:bg-[#151922]">
-                  <img
-                    src={PERSONAL_INFO.profileImg}
-                    alt={PERSONAL_INFO.name}
-                    className="w-full h-full object-cover object-center filter grayscale contrast-[1.08] hover:grayscale-0 transition-all duration-500"
-                    loading="eager"
-                  />
-                  {/* Subtle vignette gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
-
-                  {/* Clean Bottom Overlay Info */}
-                  <div className="absolute bottom-4 left-4 right-4 p-3 rounded-lg bg-white/90 dark:bg-[#0B0D12]/90 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.1]">
-                    <p className="text-xs font-semibold text-zinc-900 dark:text-white">
-                      {PERSONAL_INFO.name}
-                    </p>
-                    <p className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
-                      {PERSONAL_INFO.title}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Decorative Subtle Background Depth Ring */}
-              <div
-                className="absolute -inset-4 rounded-3xl border border-dashed border-[#5B6CFF]/20 -z-10 pointer-events-none hidden sm:block"
-                aria-hidden="true"
-              />
+              <ArrowDown size={15} />
             </motion.div>
           </div>
         </div>
-      </div>
-
-      {/* Bottom Marquee: Monochrome tech stack chips, brand color on hover */}
-      <div className="w-full mt-16 sm:mt-20 pt-6 border-t border-black/[0.06] dark:border-white/[0.08]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-3 flex items-center justify-between">
-          <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-            Teknologi &amp; Ekosistem
-          </span>
-          <span className="text-xs font-mono text-zinc-400 dark:text-zinc-500">
-            Hover untuk menyorot
-          </span>
-        </div>
-
-        <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex w-max animate-marquee space-x-3 py-1">
-            {[...TECH_STACK, ...TECH_STACK].map((item, idx) => (
-              <div
-                key={`${item.name}-${idx}`}
-                className="group flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.08] text-xs font-mono text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-[#5B6CFF]/40 transition-all duration-200 cursor-default select-none whitespace-nowrap"
-              >
-                <span
-                  className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-600 transition-colors duration-200"
-                  style={{
-                    backgroundColor: undefined,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = item.color;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '';
-                  }}
-                />
-                <span className="group-hover:text-zinc-900 dark:group-hover:text-white font-medium">
-                  {item.name}
-                </span>
-                <span className="text-[10px] text-zinc-400 dark:text-zinc-600 uppercase">
-                  {item.level}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
