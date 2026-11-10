@@ -60,7 +60,7 @@ export const PERSONAL_INFO = {
   resumePath: "/Indra Setya Ari Irawan - Resume.pdf",
   profileImg: "/IMG/STR01416 (1).JPG",
   avatarImg: "/IMG/IMG_9198.jpg",
-  status: "Open to work",
+  status: "Backend Intern @ PT SJP Bengkulu",
   ipk: "3.59",
   contributions: 129,
   streak: 1,
@@ -71,26 +71,44 @@ export const TECH_STACK: TechStackItem[] = [
   // Backend & Core
   { name: "Node.js", category: "backend", color: "#339933", level: "Advanced" },
   { name: "Python (Flask)", category: "backend", color: "#3776AB", level: "Advanced" },
-  { name: "PHP (Laravel)", category: "backend", color: "#FF2D20", level: "Advanced" },
-  { name: "C++", category: "backend", color: "#00599C", level: "Intermediate" },
+  { name: "PHP (Laravel 12)", category: "backend", color: "#FF2D20", level: "Advanced" },
+  { name: "PostgreSQL & Redis", category: "backend", color: "#4169E1", level: "Advanced" },
   { name: "RESTful API", category: "backend", color: "#5B6CFF", level: "Expert" },
+  { name: "C++", category: "backend", color: "#00599C", level: "Intermediate" },
 
   // Frontend & Mobile
-  { name: "Next.js", category: "frontend", color: "#000000", level: "Proficient" },
+  { name: "Next.js & React", category: "frontend", color: "#61DAFB", level: "Advanced" },
+  { name: "Vue.js & Inertia", category: "frontend", color: "#4FC08D", level: "Advanced" },
   { name: "TypeScript / JS", category: "frontend", color: "#3178C6", level: "Advanced" },
   { name: "Tailwind CSS", category: "frontend", color: "#06B6D4", level: "Advanced" },
   { name: "Kotlin (Android)", category: "frontend", color: "#7F52FF", level: "Proficient" },
-  { name: "React", category: "frontend", color: "#61DAFB", level: "Advanced" },
 
   // Cloud & AI
   { name: "Google Cloud (GCP)", category: "cloud_ai", color: "#4285F4", level: "Certified" },
+  { name: "Docker & Linux", category: "cloud_ai", color: "#2496ED", level: "Advanced" },
   { name: "MySQL & MongoDB", category: "cloud_ai", color: "#4479A1", level: "Advanced" },
   { name: "NLP & IndoBERT", category: "cloud_ai", color: "#5B6CFF", level: "Advanced" },
-  { name: "FastText", category: "cloud_ai", color: "#10B981", level: "Proficient" },
   { name: "Git & GitHub", category: "cloud_ai", color: "#F05032", level: "Advanced" },
 ];
 
 export const EXPERIENCES: Experience[] = [
+  {
+    id: "sjp-holding",
+    role: "Backend & Full Stack Developer Intern",
+    company: "PT Selamat Jaya Persada (SJP Holding Bengkulu)",
+    period: "Okt 2026 - Sekarang",
+    type: "work",
+    logo: "/IMG/sjp_logo.png",
+    logoFallback: "SJP",
+    desc: "Merancang dan mengembangkan sistem terpusat HRIS & Smart Attendance berbasis biometrik wajah AI dan geofencing GPS untuk operasional site pertambangan batu bara dan seluruh entitas holding.",
+    highlights: [
+      "Mengembangkan modul Backend HRIS terpusat (BE-HRIS) untuk sinkronisasi profil dan data kepegawaian holding",
+      "Mengintegrasikan inferensi biometrik wajah AI (YuNet & SFace) dan validasi GPS radius site tambang anti-spoofing",
+      "Membangun arsitektur Single Sign-On (SSO IdP) holding berbasis token handshake HMAC-SHA256 untuk aplikasi satelit",
+      "Merancang skema multi-entitas holding di PostgreSQL 16, Redis caching, dan pipeline container Docker",
+    ],
+    skills: ["Laravel 12", "PHP 8.4", "PostgreSQL", "Redis", "Docker", "REST API", "Inertia.js", "Vue 3", "Biometric AI"],
+  },
   {
     id: "bangkit",
     role: "Backend Developer | QA Engineer",
@@ -156,6 +174,21 @@ export const EXPERIENCES: Experience[] = [
 ];
 
 export const PROJECTS: Project[] = [
+  {
+    id: "presensi-sjp",
+    title: "Presensi SJP — Smart HRIS & Face Biometrics",
+    subtitle: "Enterprise Mining HRIS, Face Recognition AI & Holding SSO",
+    category: "Backend",
+    desc: "Platform terpusat HRIS & absensi pintar holding tambang batu bara PT Selamat Jaya Persada Bengkulu dengan verifikasi biometrik wajah AI, validasi geofencing GPS radius site, roster shift tambang, dan SSO IdP holding.",
+    role: "Backend & Full Stack Developer Intern",
+    tech: ["Laravel 12", "PHP 8.4", "PostgreSQL", "Redis", "Docker", "Face Biometrics", "Vue 3", "Inertia.js"],
+    image: "/IMG/sjp_mining_bg.jpg",
+    github: "https://github.com/IT-SJP/presensi-sjp",
+    featured: true,
+    problem: "Operasional pertambangan batu bara di site lapangan memerlukan presensi kehadiran akurat anti titip absen, manajemen roster dan shift kerja tambang yang dinamis, serta integrasi satu pintu (SSO) ke seluruh ekosistem aplikasi holding.",
+    solution: "Merancang arsitektur monolitik modern berbasis Laravel 12 + Inertia.js terintegrasi microservice biometrik wajah AI (YuNet + SFace), GPS radius perimeter site tambang, arsitektur database multi-entitas PostgreSQL 16 & Redis, serta protokol SSO handshake HMAC-SHA256.",
+    impact: "Menjadi Single Source of Truth bagi seluruh data kepegawaian holding PT Selamat Jaya Persada dan mengeliminasi manipulasi presensi site lapangan secara real-time.",
+  },
   {
     id: "edu-video",
     title: "Edu Video Recommendation Plugin",

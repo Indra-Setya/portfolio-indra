@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { FileCode, ArrowUpRight, CheckCircle2, Terminal, Code2, Sparkles, Layers } from 'lucide-react';
+import { FileCode, ArrowUpRight, CheckCircle2, Terminal, Code2, Sparkles, Layers, Box, User } from 'lucide-react';
 import { PERSONAL_INFO, TECH_STACK, TechStackItem } from '../data/portfolioData';
+import { TiltCard3D } from './TiltCard3D';
+import { Interactive3DCore } from './Interactive3DCore';
+import { CloudGlobe3D } from './CloudGlobe3D';
 
 // Animated Count-Up component
 const CountUp: React.FC<{ end: number; duration?: number }> = ({ end, duration = 1.4 }) => {
@@ -33,6 +36,7 @@ interface AboutProps {
 
 export const About: React.FC<AboutProps> = () => {
   const [hoveredTech, setHoveredTech] = useState<TechStackItem | null>(null);
+  const [viewMode, setViewMode] = useState<'photo' | '3d'>('photo');
 
   // Group tech stacks
   const backendTech = TECH_STACK.filter((t) => t.category === 'backend');
@@ -134,9 +138,10 @@ export const About: React.FC<AboutProps> = () => {
                     <span className="text-[#5B6CFF] font-semibold">const</span>{' '}
                     <span className="text-indigo-400">engineer</span> = {'{'}
                     {'\n  '}name: <span className="text-emerald-400">'{PERSONAL_INFO.name}'</span>,
+                    {'\n  '}current: <span className="text-emerald-400">'Backend Intern @ PT SJP (Holding Bengkulu)'</span>,
                     {'\n  '}gpa: <span className="text-emerald-400">'{PERSONAL_INFO.ipk} (Informatika UAD)'</span>,
                     {'\n  '}cohort: <span className="text-emerald-400">'Bangkit Academy Google Cloud \'24'</span>,
-                    {'\n  '}focus: [<span className="text-emerald-400">'Backend'</span>, <span className="text-emerald-400">'Cloud GCP'</span>, <span className="text-emerald-400">'AI/NLP'</span>],
+                    {'\n  '}focus: [<span className="text-emerald-400">'Backend'</span>, <span className="text-emerald-400">'Cloud GCP'</span>, <span className="text-emerald-400">'AI/NLP'</span>, <span className="text-emerald-400">'HRIS'</span>],
                     {'\n  '}available: <span className="text-amber-400">true</span>,
                     {'\n'}
                     {'}'};
@@ -146,34 +151,89 @@ export const About: React.FC<AboutProps> = () => {
             </div>
           </div>
 
-          {/* Right Column: Matthew Editorial Portrait Card with Badges (5 Cols) */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-full max-w-md rounded-3xl overflow-hidden border border-white/[0.1] bg-gradient-to-b from-white/[0.08] to-transparent p-2 shadow-2xl"
-            >
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-zinc-900">
-                <img
-                  src="/IMG/STR01416 (1).JPG"
-                  alt={PERSONAL_INFO.name}
-                  className="w-full h-full object-cover object-center filter grayscale contrast-[1.08] hover:grayscale-0 transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+          {/* Right Column: Matthew Editorial Portrait Card or Interactive 3D Core */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center space-y-4">
+            {/* View Switcher: Photo / 3D Pipeline Core */}
+            <div className="flex items-center gap-1.5 p-1 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-md">
+              <button
+                onClick={() => setViewMode('photo')}
+                className={`px-3.5 py-1.5 rounded-full font-mono text-xs flex items-center gap-1.5 transition-all ${
+                  viewMode === 'photo'
+                    ? 'bg-white text-zinc-900 font-bold shadow-md'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                <User size={12} />
+                <span>Foto Profil</span>
+              </button>
+              <button
+                onClick={() => setViewMode('3d')}
+                className={`px-3.5 py-1.5 rounded-full font-mono text-xs flex items-center gap-1.5 transition-all ${
+                  viewMode === '3d'
+                    ? 'bg-[#5B6CFF] text-white font-bold shadow-md'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                <Box size={12} />
+                <span>3D Data Core</span>
+              </button>
+            </div>
 
-                {/* Floating pill in portrait */}
-                <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs font-bold text-white">{PERSONAL_INFO.name}</div>
-                    <div className="text-[11px] font-mono text-zinc-400">{PERSONAL_INFO.title}</div>
+            {viewMode === 'photo' ? (
+              <TiltCard3D maxTilt={10} glareOpacity={0.18} className="w-full max-w-md">
+                <div className="relative rounded-3xl overflow-hidden border border-white/[0.1] bg-gradient-to-b from-white/[0.08] to-transparent p-2 shadow-2xl">
+                  <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-zinc-900">
+                    <img
+                      src="/IMG/STR01416 (1).JPG"
+                      alt={PERSONAL_INFO.name}
+                      className="w-full h-full object-cover object-center filter grayscale contrast-[1.08] hover:grayscale-0 transition-all duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+
+                    {/* Floating pill in portrait */}
+                    <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between">
+                      <div>
+                        <div className="text-xs font-bold text-white">{PERSONAL_INFO.name}</div>
+                        <div className="text-[11px] font-mono text-zinc-400">{PERSONAL_INFO.title}</div>
+                      </div>
+                      <div className="text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                        <span>Aktif</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                    <span>Aktif</span>
+                </div>
+              </TiltCard3D>
+            ) : (
+              <div className="w-full max-w-md rounded-3xl overflow-hidden border border-[#5B6CFF]/40 bg-[#0A0D14] p-3 shadow-2xl relative">
+                {/* 3D Core View */}
+                <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-[#07090E] border border-white/[0.06] flex flex-col justify-between p-4">
+                  <div className="flex items-center justify-between text-xs font-mono text-zinc-400 z-10">
+                    <span className="text-[#5B6CFF] font-semibold flex items-center gap-1">
+                      <Sparkles size={12} />
+                      <span>AI &amp; CLOUD 3D PIPELINE</span>
+                    </span>
+                    <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[10px] border border-emerald-500/20">
+                      WebGL 60FPS
+                    </span>
+                  </div>
+
+                  {/* 3D Canvas */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Interactive3DCore className="w-full h-full" theme="dark" />
+                  </div>
+
+                  {/* Bottom overlay info */}
+                  <div className="z-10 p-3 rounded-xl bg-black/70 backdrop-blur-md border border-white/10 text-[11px] font-mono text-zinc-300 flex items-center justify-between">
+                    <div>
+                      <div className="text-white font-semibold">Torus Knot + Particle Cloud</div>
+                      <div className="text-zinc-500 text-[10px]">Drag mouse to inspect 3D core</div>
+                    </div>
+                    <span className="w-2 h-2 rounded-full bg-[#5B6CFF] animate-pulse" />
                   </div>
                 </div>
               </div>
-            </motion.div>
+            )}
           </div>
         </div>
 
@@ -353,6 +413,9 @@ export const About: React.FC<AboutProps> = () => {
             </div>
           </div>
         </div>
+
+        {/* 3D Global Cloud Infrastructure Globe */}
+        <CloudGlobe3D className="mt-8" />
       </div>
     </section>
   );

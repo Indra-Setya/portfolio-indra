@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, Award, ShieldCheck, ArrowUpRight } from 'lucide-react';
 import { CERTIFICATIONS, Certification } from '../data/portfolioData';
+import { TiltCard3D } from './TiltCard3D';
 
 interface CertificationsProps {
   language?: 'id' | 'en';
@@ -65,55 +66,59 @@ export const CertificationsSection: React.FC<CertificationsProps> = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.3 }}
-                className="group rounded-3xl p-6 sm:p-7 bg-[#F7F8FA] dark:bg-[#0E1118] border border-black/[0.06] dark:border-white/[0.08] shadow-sm hover:border-[#5B6CFF]/50 transition-all duration-300 flex flex-col justify-between space-y-6"
+                className="h-full"
               >
-                <div className="space-y-4">
-                  {/* Category & Verified seal */}
-                  <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-white dark:bg-white/[0.06] text-zinc-700 dark:text-zinc-300 border border-black/[0.06] dark:border-white/[0.08] font-semibold">
-                      {cert.category}
-                    </span>
+                <TiltCard3D maxTilt={6} glareOpacity={0.12} className="h-full">
+                  <div className="h-full group rounded-3xl p-6 sm:p-7 bg-[#F7F8FA] dark:bg-[#0E1118] border border-black/[0.06] dark:border-white/[0.08] shadow-sm hover:border-[#5B6CFF]/50 transition-all duration-300 flex flex-col justify-between space-y-6">
+                    <div className="space-y-4">
+                      {/* Category & Verified seal */}
+                      <div className="flex items-center justify-between">
+                        <span className="px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-white dark:bg-white/[0.06] text-zinc-700 dark:text-zinc-300 border border-black/[0.06] dark:border-white/[0.08] font-semibold">
+                          {cert.category}
+                        </span>
 
-                    {cert.verified && (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-500">
-                        <CheckCircle2 size={13} />
-                        <span>Resmi</span>
-                      </span>
-                    )}
-                  </div>
+                        {cert.verified && (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-500">
+                            <CheckCircle2 size={13} />
+                            <span>Resmi</span>
+                          </span>
+                        )}
+                      </div>
 
-                  {/* Title & Issuer */}
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-900 dark:text-white group-hover:text-[#5B6CFF] transition-colors leading-snug">
-                      {cert.title}
-                    </h3>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1.5 font-sans">
-                      {cert.issuer}
-                    </p>
-                  </div>
-                </div>
+                      {/* Title & Issuer */}
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-900 dark:text-white group-hover:text-[#5B6CFF] transition-colors leading-snug">
+                          {cert.title}
+                        </h3>
+                        <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1.5 font-sans">
+                          {cert.issuer}
+                        </p>
+                      </div>
+                    </div>
 
-                {/* Bottom Details */}
-                <div className="space-y-3 pt-4 border-t border-black/[0.06] dark:border-white/[0.08]">
-                  <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-                    <span>Masa Berlaku</span>
-                    <span className="font-semibold text-zinc-700 dark:text-zinc-300">
-                      {cert.period}
-                    </span>
-                  </div>
+                    {/* Bottom Details */}
+                    <div className="space-y-3 pt-4 border-t border-black/[0.06] dark:border-white/[0.08]">
+                      <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
+                        <span>Masa Berlaku</span>
+                        <span className="font-semibold text-zinc-700 dark:text-zinc-300">
+                          {cert.period}
+                        </span>
+                      </div>
 
-                  {/* Skills Monospace Chips */}
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {cert.skills.map((skill, sIdx) => (
-                      <span
-                        key={sIdx}
-                        className="px-2.5 py-0.5 rounded-full bg-white dark:bg-white/[0.04] text-[10px] font-mono text-zinc-500 dark:text-zinc-400 border border-black/[0.04] dark:border-white/[0.06]"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                      {/* Skills Monospace Chips */}
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        {cert.skills.map((skill, sIdx) => (
+                          <span
+                            key={sIdx}
+                            className="px-2.5 py-0.5 rounded-full bg-white dark:bg-white/[0.04] text-[10px] font-mono text-zinc-500 dark:text-zinc-400 border border-black/[0.04] dark:border-white/[0.06]"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </TiltCard3D>
               </motion.div>
             ))}
           </AnimatePresence>

@@ -9,7 +9,7 @@ interface ExperienceProps {
 
 export const ExperienceSection: React.FC<ExperienceProps> = () => {
   const [filter, setFilter] = useState<'all' | 'work' | 'education'>('all');
-  const [expandedId, setExpandedId] = useState<string | null>('bangkit');
+  const [expandedId, setExpandedId] = useState<string | null>('sjp-holding');
 
   const filteredExperiences = filter === 'all'
     ? EXPERIENCES

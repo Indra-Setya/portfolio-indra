@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, ArrowUpRight, Download, Sparkles, MapPin, Terminal } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Download, Sparkles, MapPin, Terminal, Globe2 } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { TiltCard3D } from './TiltCard3D';
 
 interface HeroProps {
   language?: 'id' | 'en';
@@ -94,15 +95,25 @@ export const Hero: React.FC<HeroProps> = () => {
             </h2>
           </div>
 
-          {/* Right Status Badge */}
-          <div className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md border border-black/[0.06] dark:border-white/[0.08] text-xs font-mono">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-            </span>
-            <span className="text-zinc-700 dark:text-zinc-300 font-medium">
-              {PERSONAL_INFO.status} &bull; Yogyakarta
-            </span>
+          {/* Right Status Badge & 3D Interactive Anchor */}
+          <div className="flex items-center gap-2.5">
+            <a
+              href="#tentang"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md border border-[#5B6CFF]/30 text-xs font-mono text-[#5B6CFF] hover:bg-[#5B6CFF]/10 transition-all group"
+            >
+              <Sparkles size={12} className="text-[#5B6CFF] animate-pulse" />
+              <span>3D Cloud Globe &amp; Core</span>
+            </a>
+
+            <div className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md border border-black/[0.06] dark:border-white/[0.08] text-xs font-mono">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span className="text-zinc-700 dark:text-zinc-300 font-medium">
+                {PERSONAL_INFO.status}
+              </span>
+            </div>
           </div>
         </div>
 
@@ -136,20 +147,22 @@ export const Hero: React.FC<HeroProps> = () => {
             />
           </motion.div>
 
-          {/* Floating Monospace Badges (Matthew Floating Detail Micro-interactions) */}
+          {/* Floating Monospace Badges with 3D Tilt */}
           <motion.div
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             className="absolute left-2 sm:left-8 bottom-6 sm:bottom-12 z-20 hidden md:block"
           >
-            <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-[#0E1118]/90 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.1] shadow-lg space-y-1">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-                LULUSAN / KEAHLIAN
+            <TiltCard3D maxTilt={14} glareOpacity={0.25}>
+              <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-[#0E1118]/90 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.1] shadow-lg space-y-1">
+                <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                  LULUSAN / KEAHLIAN
+                </div>
+                <div className="text-xs font-bold text-zinc-900 dark:text-white">
+                  Informatika UAD &bull; IPK 3.59
+                </div>
               </div>
-              <div className="text-xs font-bold text-zinc-900 dark:text-white">
-                Informatika UAD &bull; IPK 3.59
-              </div>
-            </div>
+            </TiltCard3D>
           </motion.div>
 
           <motion.div
@@ -157,14 +170,16 @@ export const Hero: React.FC<HeroProps> = () => {
             transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
             className="absolute right-2 sm:right-8 top-8 sm:top-16 z-20 hidden md:block"
           >
-            <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-[#0E1118]/90 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.1] shadow-lg space-y-1">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-[#5B6CFF] font-semibold">
-                ALUMNI BANGKIT '24
+            <TiltCard3D maxTilt={14} glareOpacity={0.25}>
+              <div className="p-3.5 rounded-2xl bg-white/90 dark:bg-[#0E1118]/90 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.1] shadow-lg space-y-1">
+                <div className="text-[10px] font-mono uppercase tracking-wider text-[#5B6CFF] font-semibold">
+                  ALUMNI BANGKIT '24
+                </div>
+                <div className="text-xs font-bold text-zinc-900 dark:text-white">
+                  Google Cloud Certified
+                </div>
               </div>
-              <div className="text-xs font-bold text-zinc-900 dark:text-white">
-                Google Cloud Certified
-              </div>
-            </div>
+            </TiltCard3D>
           </motion.div>
         </div>
 
